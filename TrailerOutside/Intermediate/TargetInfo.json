@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "TrailerOutside",
+			"Path": "C:\\Users\\JohnGabriel\\Documents\\GitHub\\TrailerOutside407AudioCoursework\\TrailerOutside\\Source\\TrailerOutside.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "TrailerOutsideEditor",
+			"Path": "C:\\Users\\JohnGabriel\\Documents\\GitHub\\TrailerOutside407AudioCoursework\\TrailerOutside\\Source\\TrailerOutsideEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
