@@ -50,12 +50,18 @@
     <Filter Include="Source\TrailerOutside\Private">
       <UniqueIdentifier>{200D1006-B7C3-37F2-8F0C-E03A8A78C210}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\TrailerOutside\Private\BreathingComponent.cpp">
+      <Filter>Source\TrailerOutside\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\TrailerOutside\Private\FirstPersonCharacter.cpp">
       <Filter>Source\TrailerOutside\Private</Filter>
     </ClCompile>
     <Filter Include="Source\TrailerOutside\Public">
       <UniqueIdentifier>{99B518CE-0E1D-32BB-9DC1-B7F357B5BB11}</UniqueIdentifier>
     </Filter>
+    <ClInclude Include="..\..\Source\TrailerOutside\Public\BreathingComponent.h">
+      <Filter>Source\TrailerOutside\Public</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\TrailerOutside\Public\FirstPersonCharacter.h">
       <Filter>Source\TrailerOutside\Public</Filter>
     </ClInclude>

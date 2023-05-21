@@ -9,26 +9,23 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 enum class EPressure : uint8;
-enum class ECharacterMovement : uint8;
 #ifdef TRAILEROUTSIDE_FirstPersonCharacter_generated_h
 #error "FirstPersonCharacter.generated.h already included, missing '#pragma once' in FirstPersonCharacter.h"
 #endif
 #define TRAILEROUTSIDE_FirstPersonCharacter_generated_h
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_SPARSE_DATA
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_RPC_WRAPPERS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_SPARSE_DATA
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_RPC_WRAPPERS \
  \
-	DECLARE_FUNCTION(execAssessMovementInput); \
-	DECLARE_FUNCTION(execUpdateCharacterMovement);
+	DECLARE_FUNCTION(execAssessMovementInput);
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_RPC_WRAPPERS_NO_PURE_DECLS \
  \
-	DECLARE_FUNCTION(execAssessMovementInput); \
-	DECLARE_FUNCTION(execUpdateCharacterMovement);
+	DECLARE_FUNCTION(execAssessMovementInput);
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_INCLASS_NO_PURE_DECLS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAFirstPersonCharacter(); \
 	friend struct Z_Construct_UClass_AFirstPersonCharacter_Statics; \
@@ -37,7 +34,7 @@ public: \
 	DECLARE_SERIALIZER(AFirstPersonCharacter)
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_INCLASS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_INCLASS \
 private: \
 	static void StaticRegisterNativesAFirstPersonCharacter(); \
 	friend struct Z_Construct_UClass_AFirstPersonCharacter_Statics; \
@@ -46,7 +43,7 @@ public: \
 	DECLARE_SERIALIZER(AFirstPersonCharacter)
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_STANDARD_CONSTRUCTORS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AFirstPersonCharacter(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AFirstPersonCharacter) \
@@ -59,7 +56,7 @@ private: \
 public:
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_ENHANCED_CONSTRUCTORS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AFirstPersonCharacter(AFirstPersonCharacter&&); \
@@ -70,25 +67,25 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AFirstPersonCharacter)
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_39_PROLOG
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_GENERATED_BODY_LEGACY \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_59_PROLOG
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_SPARSE_DATA \
-	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_RPC_WRAPPERS \
-	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_INCLASS \
-	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_STANDARD_CONSTRUCTORS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_SPARSE_DATA \
+	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_RPC_WRAPPERS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_INCLASS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_GENERATED_BODY \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_SPARSE_DATA \
-	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_INCLASS_NO_PURE_DECLS \
-	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_42_ENHANCED_CONSTRUCTORS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_SPARSE_DATA \
+	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_INCLASS_NO_PURE_DECLS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

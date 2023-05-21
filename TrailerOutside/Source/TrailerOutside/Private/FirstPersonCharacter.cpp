@@ -2,6 +2,7 @@
 
 
 #include "FirstPersonCharacter.h"
+#include "BreathingComponent.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -9,6 +10,10 @@
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
+	// An actor component has no transform and so there is no spacial relationship to this actor to describe; it is not
+	// attached to/as the root camera component and only requires construction.
+	
+	BreathingComponent = CreateDefaultSubobject<UBreathingComponent>(TEXT("BreathingComponent"));
 }
 
 
@@ -25,32 +30,25 @@ void AFirstPersonCharacter::BeginPlay()
 }
 
 
-void AFirstPersonCharacter::UpdateCharacterMovement(ECharacterMovement InCharacterMovementMode)
+void AFirstPersonCharacter::EnterSprint(MovementPassKey InPassKey)
 {
 	if(UCharacterMovementComponent* CharacterMovementComponent = GetCharacterMovement())
 	{
-		// Update the character movement component's maximum walking speed with the relevant sprint or walk speed class
-		// members, and update the character movement mode.
-		
-		switch(InCharacterMovementMode)
-		{
-		case ECharacterMovement::Sprinting:
+		// Update the character movement component's maximum walking speed and movement mode.
 
-			CharacterMovementComponent->MaxWalkSpeed = SprintSpeed;
-			CharacterMovementMode = InCharacterMovementMode;
+		CharacterMovementComponent->MaxWalkSpeed = SprintSpeed;
+		CharacterMovementMode = ECharacterMovement::Sprinting;
+	}
+}
 
-			break;
-			
-		case ECharacterMovement::Walking:
-			
-			CharacterMovementComponent->MaxWalkSpeed = WalkSpeed;
-			CharacterMovementMode = InCharacterMovementMode;
+void AFirstPersonCharacter::EnterWalk(MovementPassKey InPassKey)
+{
+	if(UCharacterMovementComponent* CharacterMovementComponent = GetCharacterMovement())
+	{
+		// Update the character movement component's maximum walking speed and movement mode.
 
-			break;
-
-		default:
-			break;
-		}
+		CharacterMovementComponent->MaxWalkSpeed = WalkSpeed;
+		CharacterMovementMode = ECharacterMovement::Walking;
 	}
 }
 
@@ -81,9 +79,16 @@ void AFirstPersonCharacter::AssessMovementInput(const float InAxisValue, EPressu
 			if ((UKismetSystemLibrary::GetGameTimeInSeconds(this) - OutPressTimeStamp)
 				<= DoubleTapWindow)
 			{
-				// Run! (Prepare the character movement speed for, and flag that the character is, sprinting).
-                
-				UpdateCharacterMovement(ECharacterMovement::Sprinting);
+				// Run! (Or, pass onto the Breathing system that the player has input some intention to enter a sprint;
+				// the Breathing system will use this information to update its representation of the physical intensity
+				// the player and may not condone entry into a sprint where the character is exhausted.
+				
+				// The character movement mode switches according to audio design).
+				
+				if (BreathingComponent)
+				{
+					BreathingComponent->UpdateCharacterMovement(this, ECharacterMovement::Sprinting);
+				}
 			}
 		}
         
@@ -115,7 +120,7 @@ void AFirstPersonCharacter::AssessMovementInput(const float InAxisValue, EPressu
     		// Where neither the movement in the forward or lateral axis is significant (/Existing), relax the character
     		// movement mode (Return to walking pace).
 
-    		UpdateCharacterMovement(ECharacterMovement::Walking);
+    		//UpdateCharacterMovement(ECharacterMovement::Walking);
     	}
     }
 }

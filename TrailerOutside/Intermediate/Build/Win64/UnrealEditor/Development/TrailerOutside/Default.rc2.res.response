@@ -61,7 +61,7 @@
 /DBUILT_FROM_CHANGELIST=20979098
 /DBUILD_VERSION=++UE5+Release-5.0-CL-20979098
 /DBUILD_ICON_FILE_NAME="\"..\\Build\\Windows\\Resources\\Default.ico\""
-/DPROJECT_COPYRIGHT_STRING="// Work done for the Abertay University Computer Games Application Development module, \Audio Programming\ (CMP407)."
+/DPROJECT_COPYRIGHT_STRING="Work done for the Abertay University Computer Games Application Development module, Audio Programming (CMP407)."
 /DPROJECT_PRODUCT_NAME="First Person BP Game Template"
 /DPROJECT_PRODUCT_IDENTIFIER=TrailerOutside
 /fo "C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\Default.rc2.res"

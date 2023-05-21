@@ -1,0 +1,23 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\source\\traileroutside\\private\\breathingcomponent.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\traileroutsideeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\unrealeditor\\development\\traileroutside\\definitions.traileroutside.h",
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\source\\traileroutside\\public\\breathingcomponent.h",
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\unrealeditor\\inc\\traileroutside\\breathingcomponent.generated.h",
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\source\\traileroutside\\public\\firstpersoncharacter.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\charactermovementreplication.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\rootmotionsource.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\character.generated.h",
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\unrealeditor\\inc\\traileroutside\\firstpersoncharacter.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

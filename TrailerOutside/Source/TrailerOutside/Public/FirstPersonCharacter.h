@@ -2,9 +2,13 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Templates/UnrealTemplate.h"
 #include "FirstPersonCharacter.generated.h"
+
+
+/** Forward declaration. */
+class UBreathingComponent;
 
 
 /**
@@ -34,6 +38,22 @@ enum class ECharacterMovement : uint8
 
 
 /**
+ *	The Passkey pattern for access-protection is implemented so that the first person Character class may expose a
+ *	sensitive method and so offer another class control over the changing of the character movement mode.
+ */
+class MovementPassKey : FNoncopyable
+{
+	/**
+	 *	The Breathing component is to update character movement mode according to its reinterpretation of state change
+	 *	instructions from the first person character.
+	 */
+	friend UBreathingComponent;
+	
+	MovementPassKey() = default;
+};
+
+
+/**
  *	The change of state of player movement is resolved according to axis mappings (Keyboard input, for example).
  */
 UCLASS()
@@ -49,15 +69,13 @@ protected:
 	/** Called when the game starts or when spawned. */
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	/**
-	 *	Update the character movement mode and, according to that mode (The kind of which is offered as an argument),
-	 *	set this character's movement component's movement (Maximum walking) speed.
-	 *
-	 *	@param InCharacterMovementMode	The kind of movement that the character is to exhibit.
+	 *	Update the character movement mode and, according to that mode ("Sprinting," or "Walking"), set this character's
+	 *	movement component's movement (Maximum walking) speed.
 	 */
-	UFUNCTION()
-		void UpdateCharacterMovement(ECharacterMovement InCharacterMovementMode);
+	void EnterSprint(MovementPassKey InPassKey);
+	void EnterWalk(MovementPassKey InPassKey);
 
 	/**
 	 *	Input along some axis may one in a sequence of two identical (In their axis along a direction) commands. Process
@@ -90,6 +108,14 @@ public:
 
 	
 private:
+	/**
+	 *	A reusable, abstract (A component that does not require any physical representation) behaviour that is an
+	 *	essential component of character movement (Interprets movement mode changes through the state of its "Breathing"
+	 *	system of audio loops).
+	 */
+	UPROPERTY()
+		UBreathingComponent* BreathingComponent = nullptr;
+	
 	/**
 	 *	For input to qualify as "Hard" (For it to register as a complete input) its scale must escape the default,
 	 *	"Easy."
