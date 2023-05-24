@@ -17,11 +17,15 @@ enum class EPressure : uint8;
 #define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_SPARSE_DATA
 #define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execMoveAlongLateralAxis); \
+	DECLARE_FUNCTION(execMoveAlongForwardAxis); \
 	DECLARE_FUNCTION(execAssessMovementInput);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execMoveAlongLateralAxis); \
+	DECLARE_FUNCTION(execMoveAlongForwardAxis); \
 	DECLARE_FUNCTION(execAssessMovementInput);
 
 

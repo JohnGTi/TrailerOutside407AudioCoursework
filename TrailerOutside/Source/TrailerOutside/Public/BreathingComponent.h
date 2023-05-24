@@ -19,7 +19,8 @@ enum class EPhysicalEffort : uint8
 {
 	Regular,
 	Heavy,
-	Recovery
+	Recovery,
+	Faint
 };
 
 
@@ -29,7 +30,7 @@ enum class EPhysicalEffort : uint8
  *	person character's movement (The first person "Character" class calls upon this component to handle movement mode
  *	updates according to the player's input).
  */
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TRAILEROUTSIDE_API UBreathingComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -37,6 +38,14 @@ class TRAILEROUTSIDE_API UBreathingComponent : public UActorComponent
 public:	
 	/** Sets default values for this component's properties. */
 	UBreathingComponent();
+
+	/**
+	 *	Create an audio component with default settings (Specifically, with zero spatialisation) that are suitable to
+	 *	the stereo (The sound is to envelope the player's head) breathing effect. Subscribe a class method that is to
+	 *	control a change in the MetaSound to handle, to an audio component delegate that signals the end of playback.
+	 */
+	UFUNCTION()
+		void InitialiseBreathingPattern();
 
 protected:
 	/** Called when the game starts. */
@@ -53,16 +62,93 @@ public:
 	 *
 	 *	@param InCharacterMovementMode	The character movement mode (An indicator of the speed at which the first person
 	 *									character is to move) that a caller wishes to change to.
-	 *	@param Character	The first person "Character."
+	 *	@param InCharacter	The first person "Character."
 	 */
 	UFUNCTION()
-		void UpdateCharacterMovement(class AFirstPersonCharacter* Character
+		void UpdateCharacterMovement(class AFirstPersonCharacter* InCharacter
 			, const ECharacterMovement InCharacterMovementMode);
 
 
 
 private:
-	/**  */
+	/**
+	 *	The Blueprint interface of this actor component is to assign soft references to the MetaSound assets that are to
+	 *	be assigned to the "Breathing" audio component for each kind of breathing pattern (Or, "EPhysicalEffort").
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "BreathingPatternAssets")
+		USoundBase* RegularBreathPattern = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "BreathingPatternAssets")
+		USoundBase* HeavyBreathPattern = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "BreathingPatternAssets")
+		USoundBase* FeverishBreathPattern = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "BreathingPatternAssets")
+		USoundBase* FaintBreath = nullptr;
+
+	/**
+	 *	The current state of physical effort will key the MetaSound representation of the associated breathing pattern.
+	 */
+	UPROPERTY()
+		TMap<EPhysicalEffort, USoundBase*> BreathingPatternMap;
+
+	/**
+	 *	The "Breathing" audio component handles a MetaSound, at a time, that will play a single or series of breathing
+	 *	pattern audio assets. Continuous playing of a series of breathing patterns may come to an end after a maximum
+	 *	number has been played, or having been interrupted by an input flag sent in response to movement of the first
+	 *	person character.
+	 */
+	UPROPERTY()
+		UAudioComponent* BreathingAudioComponent = nullptr;
+	
+	/** Motivated by the movement mode of the first person character that defaults to the "Walking" state. */
 	UPROPERTY()
 		EPhysicalEffort PhysicalEffort = EPhysicalEffort::Regular;
+	
+	/**
+	 *	An exhausted character cannot break into sprint; the first person character is exhausted by sprinting without
+	 *	the benefit of a full recovery (The player commands that a character sprints during the runtime of a recovery
+	 *	duration).
+	 */
+	bool bIsExhausted = false;
+	
+	/**
+	 *	The number of cycles a character will be made to (Feverishly) breathe before they have recovered from physical
+	 *	effort. The recovery duration
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "PhysicalHealth")
+		uint8 RecoveryBreaths = 2;
+
+	/**
+	 *	The number of cycles a character will be made to (Feverishly) breathe before they have recovered from exhausted
+	 *	physical effort.
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "PhysicalHealth")
+		uint8 PenaltyRecoveryBreaths = 5;
+
+#if WITH_EDITOR
+	
+	/**
+	 *	The number of breath cycles that are to repeat before a full recovery from exhausted physical effort is made is
+	 *	to be no less than one cycle greater than a standard recovery duration.
+	 */
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+
+#endif
+	
+
+	/** The duration, in number of cycles of breaths, that a character will not be able to sprint /without penalty. */
+	uint8 RecoveryDuration = 2;
+
+	/** The duration, in number of cycles of breaths, that a character may sprint for. */
+	UPROPERTY(EditDefaultsOnly, Category = "PhysicalHealth")
+		uint8 SprintDuration = 4;
+
+	/**
+	 *	The number of heavy breaths taken, as of the character breaking into a sprint, will be counted so as to measure
+	 *	the duration of the sprint (Useful, where the character slows their pace prior to the maximum burst duration of
+	 *	a sprint; a short enough burst does not incur *any* recovery penalty).
+	 */
+	uint8 HeavyBreathCycles = 0;
 };

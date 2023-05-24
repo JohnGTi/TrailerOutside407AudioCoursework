@@ -15,6 +15,7 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_AFirstPersonCharacter_NoRegister();
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_AFirstPersonCharacter();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_UBreathingComponent_NoRegister();
 // End Cross Module References
 	static FEnumRegistrationInfo Z_Registration_Info_UEnum_EPressure;
@@ -127,6 +128,22 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		}
 		return Z_Registration_Info_UEnum_ECharacterMovement.InnerSingleton;
 	}
+	DEFINE_FUNCTION(AFirstPersonCharacter::execMoveAlongLateralAxis)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_InAxisValue);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->MoveAlongLateralAxis(Z_Param_InAxisValue);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AFirstPersonCharacter::execMoveAlongForwardAxis)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_InAxisValue);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->MoveAlongForwardAxis(Z_Param_InAxisValue);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AFirstPersonCharacter::execAssessMovementInput)
 	{
 		P_GET_PROPERTY(FFloatProperty,Z_Param_InAxisValue);
@@ -142,6 +159,8 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		UClass* Class = AFirstPersonCharacter::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AssessMovementInput", &AFirstPersonCharacter::execAssessMovementInput },
+			{ "MoveAlongForwardAxis", &AFirstPersonCharacter::execMoveAlongForwardAxis },
+			{ "MoveAlongLateralAxis", &AFirstPersonCharacter::execMoveAlongLateralAxis },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -188,13 +207,81 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		{ "ToolTip", "Input along some axis may one in a sequence of two identical (In their axis along a direction) commands. Process\nthe input, accordingly (Timestamp the ease of a \"Hard\" input, or update the character movement mode upon a\ndouble \"tap\").\n\n@param InAxisValue                      Indicative of the speed and direction at which the player is to move along an axis.\n@param OutInputPressure         A binary interpretation of the previous tick's axis scale; key down (\"Hard\") or up\n                                                        (\"Easy\")/analogue stick closer to the boundary (\"Hard\") or rest (\"Easy\").\n@param OutPressTimeStamp        The game time, in seconds, that a \"Hard\" press was made." },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFirstPersonCharacter, nullptr, "AssessMovementInput", nullptr, nullptr, sizeof(Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::FirstPersonCharacter_eventAssessMovementInput_Parms), Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00420401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFirstPersonCharacter, nullptr, "AssessMovementInput", nullptr, nullptr, sizeof(Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::FirstPersonCharacter_eventAssessMovementInput_Parms), Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00440401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput()
 	{
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics
+	{
+		struct FirstPersonCharacter_eventMoveAlongForwardAxis_Parms
+		{
+			float InAxisValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_InAxisValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::NewProp_InAxisValue = { "InAxisValue", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FirstPersonCharacter_eventMoveAlongForwardAxis_Parms, InAxisValue), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::NewProp_InAxisValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "/**\n\x09 *\x09@param\x09InAxisValue\x09The speed at which the player is to move along the forward axis is scaled according to\n\x09 *\x09\x09\x09\x09\x09\x09""controller input.\n\x09 */" },
+		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
+		{ "ToolTip", "@param  InAxisValue     The speed at which the player is to move along the forward axis is scaled according to\n                                        controller input." },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFirstPersonCharacter, nullptr, "MoveAlongForwardAxis", nullptr, nullptr, sizeof(Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::FirstPersonCharacter_eventMoveAlongForwardAxis_Parms), Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics
+	{
+		struct FirstPersonCharacter_eventMoveAlongLateralAxis_Parms
+		{
+			float InAxisValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_InAxisValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::NewProp_InAxisValue = { "InAxisValue", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FirstPersonCharacter_eventMoveAlongLateralAxis_Parms, InAxisValue), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::NewProp_InAxisValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "/**\n\x09 *\x09@param\x09InAxisValue\x09The speed at which the player is to move along the right/lateral axis is scaled according to\n\x09 *\x09\x09\x09\x09\x09\x09""controller input.\n\x09 */" },
+		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
+		{ "ToolTip", "@param  InAxisValue     The speed at which the player is to move along the right/lateral axis is scaled according to\n                                        controller input." },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFirstPersonCharacter, nullptr, "MoveAlongLateralAxis", nullptr, nullptr, sizeof(Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::FirstPersonCharacter_eventMoveAlongLateralAxis_Parms), Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -210,6 +297,10 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_BPBreathingComponent_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_BPBreathingComponent;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_BreathingComponent_MetaData[];
 #endif
@@ -229,18 +320,6 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_CharacterMovementMode_MetaData[];
 #endif
 		static const UECodeGen_Private::FEnumPropertyParams NewProp_CharacterMovementMode;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_PreviousDirection_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_PreviousDirection;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_HardForwardTimeStamp_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_HardForwardTimeStamp;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_HardLateralTimeStamp_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_HardLateralTimeStamp;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DoubleTapWindow_MetaData[];
 #endif
@@ -262,7 +341,9 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_TrailerOutside,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AFirstPersonCharacter_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput, "AssessMovementInput" }, // 1703851867
+		{ &Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput, "AssessMovementInput" }, // 3112691335
+		{ &Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis, "MoveAlongForwardAxis" }, // 2647273091
+		{ &Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis, "MoveAlongLateralAxis" }, // 2548438137
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::Class_MetaDataParams[] = {
@@ -274,11 +355,18 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 	};
 #endif
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BPBreathingComponent_MetaData[] = {
+		{ "Category", "BlueprintComponents" },
 		{ "Comment", "/**\n\x09 *\x09""A reusable, abstract (A component that does not require any physical representation) behaviour that is an\n\x09 *\x09""essential component of character movement (Interprets movement mode changes through the state of its \"Breathing\"\n\x09 *\x09system of audio loops).\n\x09 */" },
-		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
 		{ "ToolTip", "A reusable, abstract (A component that does not require any physical representation) behaviour that is an\nessential component of character movement (Interprets movement mode changes through the state of its \"Breathing\"\nsystem of audio loops)." },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BPBreathingComponent = { "BPBreathingComponent", nullptr, (EPropertyFlags)0x0044000000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, BPBreathingComponent), Z_Construct_UClass_UBreathingComponent_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BPBreathingComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BPBreathingComponent_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent = { "BreathingComponent", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, BreathingComponent), Z_Construct_UClass_UBreathingComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent_MetaData)) };
@@ -308,28 +396,6 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 #endif
 	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_CharacterMovementMode = { "CharacterMovementMode", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, CharacterMovementMode), Z_Construct_UEnum_TrailerOutside_ECharacterMovement, METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_CharacterMovementMode_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_CharacterMovementMode_MetaData)) }; // 3212392268
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_PreviousDirection_MetaData[] = {
-		{ "Comment", "/** The normalised direction of the previous, \"Hard\" movement command. */" },
-		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
-		{ "ToolTip", "The normalised direction of the previous, \"Hard\" movement command." },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_PreviousDirection = { "PreviousDirection", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, PreviousDirection), METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_PreviousDirection_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_PreviousDirection_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardForwardTimeStamp_MetaData[] = {
-		{ "Comment", "/**\n\x09 *\x09The game time, in seconds, that the movement of the character along an axis was initiated (For the comparison\n\x09 *\x09""between the subsequent input, so as to assess whether or not the series of inputs constitute a double \"tap\").\n\x09 */" },
-		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
-		{ "ToolTip", "The game time, in seconds, that the movement of the character along an axis was initiated (For the comparison\nbetween the subsequent input, so as to assess whether or not the series of inputs constitute a double \"tap\")." },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardForwardTimeStamp = { "HardForwardTimeStamp", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, HardForwardTimeStamp), METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardForwardTimeStamp_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardForwardTimeStamp_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardLateralTimeStamp_MetaData[] = {
-		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardLateralTimeStamp = { "HardLateralTimeStamp", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, HardLateralTimeStamp), METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardLateralTimeStamp_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardLateralTimeStamp_MetaData)) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_DoubleTapWindow_MetaData[] = {
 		{ "Category", "InputResponsiveness" },
 		{ "Comment", "/**\n\x09 *\x09The period of time in which a player must follow up an initial movement of the character with a second,\n\x09 *\x09identical movement command, for their input to be considered a double \"tap\" (The tapping of the physical\n\x09 *\x09""boundary of a key down, or a gamepad analogue stick's pivot).\n\x09 */" },
@@ -357,6 +423,7 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_WalkSpeed = { "WalkSpeed", nullptr, (EPropertyFlags)0x0040000000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, WalkSpeed), METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_WalkSpeed_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_WalkSpeed_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFirstPersonCharacter_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BPBreathingComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_ForwardPressure_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_ForwardPressure,
@@ -364,9 +431,6 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_LateralPressure,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_CharacterMovementMode_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_CharacterMovementMode,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_PreviousDirection,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardForwardTimeStamp,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_HardLateralTimeStamp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_DoubleTapWindow,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_SprintSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_WalkSpeed,
@@ -412,9 +476,9 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		{ ECharacterMovement_StaticEnum, TEXT("ECharacterMovement"), &Z_Registration_Info_UEnum_ECharacterMovement, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3212392268U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFirstPersonCharacter, AFirstPersonCharacter::StaticClass, TEXT("AFirstPersonCharacter"), &Z_Registration_Info_UClass_AFirstPersonCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFirstPersonCharacter), 1106170929U) },
+		{ Z_Construct_UClass_AFirstPersonCharacter, AFirstPersonCharacter::StaticClass, TEXT("AFirstPersonCharacter"), &Z_Registration_Info_UClass_AFirstPersonCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFirstPersonCharacter), 1939134075U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_3934469337(TEXT("/Script/TrailerOutside"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_194701304(TEXT("/Script/TrailerOutside"),
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::EnumInfo));

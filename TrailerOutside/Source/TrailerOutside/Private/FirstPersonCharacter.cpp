@@ -10,10 +10,25 @@
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
-	// An actor component has no transform and so there is no spacial relationship to this actor to describe; it is not
-	// attached to/as the root camera component and only requires construction.
+}
+
+
+void AFirstPersonCharacter::PreInitializeComponents()
+{
+	Super::PreInitializeComponents();
+
+	// An actor component has no transform and so there is no spacial relationship to this actor to describe.
 	
-	BreathingComponent = CreateDefaultSubobject<UBreathingComponent>(TEXT("BreathingComponent"));
+	BreathingComponent = NewObject<UBreathingComponent>(this, BPBreathingComponent);
+
+	if (BreathingComponent)
+	{
+		// As construction of the component is not done by way of a constructor helper, the component must be manually
+		// registered.
+		
+		BreathingComponent->RegisterComponent();
+		AddInstanceComponent(BreathingComponent);
+	}
 }
 
 
@@ -80,8 +95,8 @@ void AFirstPersonCharacter::AssessMovementInput(const float InAxisValue, EPressu
 				<= DoubleTapWindow)
 			{
 				// Run! (Or, pass onto the Breathing system that the player has input some intention to enter a sprint;
-				// the Breathing system will use this information to update its representation of the physical intensity
-				// the player and may not condone entry into a sprint where the character is exhausted.
+				// the Breathing system will use this information to update its representation of the intensity of the
+				// player's movement effort and may not condone entry into a sprint where the character is exhausted.
 				
 				// The character movement mode switches according to audio design).
 				
@@ -104,23 +119,22 @@ void AFirstPersonCharacter::AssessMovementInput(const float InAxisValue, EPressu
     }
     else if (InAxisValue < 0.5f && InAxisValue > -0.5f && OutInputPressure == EPressure::Hard)
     {
-    	// (Easing of movement along an axis may be the release of a keyboard key or the easing of a gamepad analogue
-    	// stick).
-    	
+    	// Easing of movement along an axis may be the release of a keyboard key or the easing of a gamepad analogue
+    	// stick (Hence, the broad range in which an command is considered to be lifted).
+
     	OutInputPressure = EPressure::Easy;
-
-    	// Declare and subscribe to a delegate that carries a payload so as to copy the screen space location of
-    	// the press that this event responds to the release of, into a method that handles the case of a single
-    	// press input.
-				
-    	FTimerDelegate EaseSprintDelegate;
-				
-    	if (ForwardPressure != EPressure::Hard && LateralPressure != EPressure::Hard)
+    	
+    	// (The OutInputPressure, set to "Easy," references either ForwardPressure, or LateralPressure).
+    	
+    	if (ForwardPressure == LateralPressure)
     	{
-    		// Where neither the movement in the forward or lateral axis is significant (/Existing), relax the character
-    		// movement mode (Return to walking pace).
+    		// Where neither the movement in the forward or lateral axis is significant ("Hard"/Existing), relax the
+    		// character movement mode (Return to walking pace).
 
-    		//UpdateCharacterMovement(ECharacterMovement::Walking);
+    		if (BreathingComponent)
+    		{
+    			//BreathingComponent->UpdateCharacterMovement(this, ECharacterMovement::Sprinting);
+    		}
     	}
     }
 }

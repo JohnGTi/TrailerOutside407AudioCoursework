@@ -15,18 +15,20 @@ enum class ECharacterMovement : uint8;
 #endif
 #define TRAILEROUTSIDE_BreathingComponent_generated_h
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_SPARSE_DATA
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_RPC_WRAPPERS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_SPARSE_DATA
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_RPC_WRAPPERS \
  \
-	DECLARE_FUNCTION(execUpdateCharacterMovement);
+	DECLARE_FUNCTION(execUpdateCharacterMovement); \
+	DECLARE_FUNCTION(execInitialiseBreathingPattern);
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_RPC_WRAPPERS_NO_PURE_DECLS \
  \
-	DECLARE_FUNCTION(execUpdateCharacterMovement);
+	DECLARE_FUNCTION(execUpdateCharacterMovement); \
+	DECLARE_FUNCTION(execInitialiseBreathingPattern);
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_INCLASS_NO_PURE_DECLS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUBreathingComponent(); \
 	friend struct Z_Construct_UClass_UBreathingComponent_Statics; \
@@ -35,7 +37,7 @@ public: \
 	DECLARE_SERIALIZER(UBreathingComponent)
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_INCLASS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_INCLASS \
 private: \
 	static void StaticRegisterNativesUBreathingComponent(); \
 	friend struct Z_Construct_UClass_UBreathingComponent_Statics; \
@@ -44,7 +46,7 @@ public: \
 	DECLARE_SERIALIZER(UBreathingComponent)
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_STANDARD_CONSTRUCTORS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UBreathingComponent(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UBreathingComponent) \
@@ -57,7 +59,7 @@ private: \
 public:
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_ENHANCED_CONSTRUCTORS \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API UBreathingComponent(UBreathingComponent&&); \
@@ -68,25 +70,25 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UBreathingComponent)
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_19_PROLOG
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_GENERATED_BODY_LEGACY \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_33_PROLOG
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_SPARSE_DATA \
-	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_RPC_WRAPPERS \
-	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_INCLASS \
-	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_STANDARD_CONSTRUCTORS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_SPARSE_DATA \
+	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_RPC_WRAPPERS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_INCLASS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_GENERATED_BODY \
+#define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_SPARSE_DATA \
-	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_INCLASS_NO_PURE_DECLS \
-	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_22_ENHANCED_CONSTRUCTORS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_SPARSE_DATA \
+	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_INCLASS_NO_PURE_DECLS \
+	FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -96,5 +98,14 @@ template<> TRAILEROUTSIDE_API UClass* StaticClass<class UBreathingComponent>();
 #undef CURRENT_FILE_ID
 #define CURRENT_FILE_ID FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h
 
+
+#define FOREACH_ENUM_EPHYSICALEFFORT(op) \
+	op(EPhysicalEffort::Regular) \
+	op(EPhysicalEffort::Heavy) \
+	op(EPhysicalEffort::Recovery) \
+	op(EPhysicalEffort::Faint) 
+
+enum class EPhysicalEffort : uint8;
+template<> TRAILEROUTSIDE_API UEnum* StaticEnum<EPhysicalEffort>();
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

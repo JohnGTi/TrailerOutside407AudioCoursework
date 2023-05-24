@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-TrailerOutside-0733.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\TrailerOutsideEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\TrailerOutside.cpp.obj"
+"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\BreathingComponent.cpp.obj"
+"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\FirstPersonCharacter.cpp.obj"
+"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\BreathingComponent.gen.cpp.obj"
+"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\FirstPersonCharacter.gen.cpp.obj"
+"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\TrailerOutside.init.gen.cpp.obj"
+"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\Default.rc2.res"
+/OUT:"C:\Users\JohnGabriel\Documents\GitHub\TrailerOutside407AudioCoursework\TrailerOutside\Intermediate\Build\Win64\UnrealEditor\Development\TrailerOutside\UnrealEditor-TrailerOutside-0733.lib"

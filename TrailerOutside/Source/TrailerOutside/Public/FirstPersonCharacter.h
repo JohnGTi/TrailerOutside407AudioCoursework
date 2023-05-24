@@ -39,7 +39,7 @@ enum class ECharacterMovement : uint8
 
 /**
  *	The Passkey pattern for access-protection is implemented so that the first person Character class may expose a
- *	sensitive method and so offer another class control over the changing of the character movement mode.
+ *	sensitive method that offers another class control over the changing of the character movement mode.
  */
 class MovementPassKey : FNoncopyable
 {
@@ -66,6 +66,12 @@ public:
 	AFirstPersonCharacter();
 
 protected:
+	/**
+	 *	Prior to the initialisation of any components, Blueprint data available for the creation of a Blueprint
+	 *	implemented component.
+	 */
+	virtual void PreInitializeComponents() override;
+	
 	/** Called when the game starts or when spawned. */
 	virtual void BeginPlay() override;
 
@@ -77,6 +83,8 @@ public:
 	void EnterSprint(MovementPassKey InPassKey);
 	void EnterWalk(MovementPassKey InPassKey);
 
+
+private:
 	/**
 	 *	Input along some axis may one in a sequence of two identical (In their axis along a direction) commands. Process
 	 *	the input, accordingly (Timestamp the ease of a "Hard" input, or update the character movement mode upon a
@@ -90,17 +98,21 @@ public:
 	UFUNCTION()
 		void AssessMovementInput(const float InAxisValue, EPressure& OutInputPressure, float& OutPressTimeStamp);
 
+
+public:
 	/**
 	 *	@param	InAxisValue	The speed at which the player is to move along the forward axis is scaled according to
 	 *						controller input.
 	 */
-	void MoveAlongForwardAxis(float InAxisValue);
+	UFUNCTION()
+		void MoveAlongForwardAxis(float InAxisValue);
 
 	/**
 	 *	@param	InAxisValue	The speed at which the player is to move along the right/lateral axis is scaled according to
 	 *						controller input.
 	 */
-	void MoveAlongLateralAxis(float InAxisValue);
+	UFUNCTION()
+		void MoveAlongLateralAxis(float InAxisValue);
 
 	/** Called to bind movement functionality to keyboard input. */
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -113,6 +125,8 @@ private:
 	 *	essential component of character movement (Interprets movement mode changes through the state of its "Breathing"
 	 *	system of audio loops).
 	 */
+	UPROPERTY(EditDefaultsOnly, Category = "BlueprintComponents")
+		TSubclassOf<UBreathingComponent> BPBreathingComponent;
 	UPROPERTY()
 		UBreathingComponent* BreathingComponent = nullptr;
 	
@@ -130,17 +144,14 @@ private:
 		ECharacterMovement CharacterMovementMode = ECharacterMovement::Walking;
 
 	/** The normalised direction of the previous, "Hard" movement command. */
-	UPROPERTY()
-		float PreviousDirection = 0.f;
+	float PreviousDirection = 0.f;
 
 	/**
 	 *	The game time, in seconds, that the movement of the character along an axis was initiated (For the comparison
 	 *	between the subsequent input, so as to assess whether or not the series of inputs constitute a double "tap").
 	 */
-	UPROPERTY()
-		float HardForwardTimeStamp = 0.f;
-	UPROPERTY()
-		float HardLateralTimeStamp = 0.f;
+	float HardForwardTimeStamp = 0.f;
+	float HardLateralTimeStamp = 0.f;
 
 	/**
 	 *	The period of time in which a player must follow up an initial movement of the character with a second,
