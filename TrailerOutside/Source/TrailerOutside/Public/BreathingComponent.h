@@ -39,6 +39,8 @@ public:
 	/** Sets default values for this component's properties. */
 	UBreathingComponent();
 
+
+private:
 	/**
 	 *	Create an audio component with default settings (Specifically, with zero spatialisation) that are suitable to
 	 *	the stereo (The sound is to envelope the player's head) breathing effect. Subscribe a class method that is to
@@ -47,15 +49,28 @@ public:
 	UFUNCTION()
 		void InitialiseBreathingPattern();
 
+	/**  */
+	UFUNCTION()
+		void EnterRecovery();
+
+	/**
+	 *	@param InPhysicalEffort	The state of physical effort that is to be changed set.
+	 */
+	UFUNCTION()
+		void SetPhysicalEffort(EPhysicalEffort InPhysicalEffort);
+
+	/**
+	 *	
+	 */
+	UFUNCTION()
+		void ControlCharacterBreathing();
+
 protected:
 	/** Called when the game starts. */
 	virtual void BeginPlay() override;
 
+	
 public:	
-	/** Called every frame. */
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType
-		, FActorComponentTickFunction* ThisTickFunction) override;
-
 	/**
 	 *	Protected first person character methods that directly change the mode of character movement are called upon
 	 *	according to the Breathing system's reinterpretation of that which is offered as an argument.
@@ -101,6 +116,12 @@ private:
 	 */
 	UPROPERTY()
 		UAudioComponent* BreathingAudioComponent = nullptr;
+
+	/**
+	 *	The statement that a change in physical effort was made is useful in informing a MetaSound that it may no longer
+	 *	cycle its playback of audio, for example.
+	 */
+	bool bChangeInPhysicalEffort = false;
 	
 	/** Motivated by the movement mode of the first person character that defaults to the "Walking" state. */
 	UPROPERTY()
@@ -141,6 +162,9 @@ private:
 	/** The duration, in number of cycles of breaths, that a character will not be able to sprint /without penalty. */
 	uint8 RecoveryDuration = 2;
 
+	/** The number of recovery breaths taken (Since new entry into the recovery state). */
+	uint8 RecoveryBreathCycle = 0;
+
 	/** The duration, in number of cycles of breaths, that a character may sprint for. */
 	UPROPERTY(EditDefaultsOnly, Category = "PhysicalHealth")
 		uint8 SprintDuration = 4;
@@ -150,5 +174,5 @@ private:
 	 *	the duration of the sprint (Useful, where the character slows their pace prior to the maximum burst duration of
 	 *	a sprint; a short enough burst does not incur *any* recovery penalty).
 	 */
-	uint8 HeavyBreathCycles = 0;
+	uint8 HeavyBreathCycle = 0;
 };

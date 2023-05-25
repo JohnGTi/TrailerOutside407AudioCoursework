@@ -10,6 +10,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AFirstPersonCharacter;
 enum class ECharacterMovement : uint8;
+enum class EPhysicalEffort : uint8;
 #ifdef TRAILEROUTSIDE_BreathingComponent_generated_h
 #error "BreathingComponent.generated.h already included, missing '#pragma once' in BreathingComponent.h"
 #endif
@@ -19,12 +20,18 @@ enum class ECharacterMovement : uint8;
 #define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execUpdateCharacterMovement); \
+	DECLARE_FUNCTION(execControlCharacterBreathing); \
+	DECLARE_FUNCTION(execSetPhysicalEffort); \
+	DECLARE_FUNCTION(execEnterRecovery); \
 	DECLARE_FUNCTION(execInitialiseBreathingPattern);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execUpdateCharacterMovement); \
+	DECLARE_FUNCTION(execControlCharacterBreathing); \
+	DECLARE_FUNCTION(execSetPhysicalEffort); \
+	DECLARE_FUNCTION(execEnterRecovery); \
 	DECLARE_FUNCTION(execInitialiseBreathingPattern);
 
 

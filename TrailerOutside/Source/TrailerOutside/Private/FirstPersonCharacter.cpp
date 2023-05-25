@@ -133,7 +133,7 @@ void AFirstPersonCharacter::AssessMovementInput(const float InAxisValue, EPressu
 
     		if (BreathingComponent)
     		{
-    			//BreathingComponent->UpdateCharacterMovement(this, ECharacterMovement::Sprinting);
+    			BreathingComponent->UpdateCharacterMovement(this, ECharacterMovement::Walking);
     		}
     	}
     }

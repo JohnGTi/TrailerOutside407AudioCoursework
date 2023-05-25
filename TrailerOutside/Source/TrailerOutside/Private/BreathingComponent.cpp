@@ -38,26 +38,196 @@ void UBreathingComponent::InitialiseBreathingPattern()
 		// Spawn (Without spatialisation or distance-attenuation) an audio component that is to handle the MetaSound
 		// that newly represents the change in the first person character's kind of breathing.
         
-        BreathingAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), BreathCycleMetaSound, 1.f
-        		, 1.f, 0.f, nullptr, true, true);
-        
-        // Subscribe (To the dynamic delegate "OnAudioFinished") a class method that is to control the changing of audio
-        // component (And with it, aural representation of the character's physical effort) upon the stopping of the new
-        // audio component.
-        
-        BreathingAudioComponent->OnAudioFinished.AddUniqueDynamic(this
-        	, &UBreathingComponent::InitialiseBreathingPattern);
+		BreathingAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), BreathCycleMetaSound, 1.f
+				, 1.f, 0.f, nullptr, true, true);
 
-		if (PhysicalEffort == EPhysicalEffort::Heavy)
+		if (BreathingAudioComponent == nullptr)
 		{
-			BreathingAudioComponent->SetIntParameter(TEXT("NumberOfBreaths"), SprintDuration);
+			// This return sees no other path to restart audio. Either design some contingency or throw an error.
+			return;
 		}
-		
-        /**/
-        FText SpecialInputValue = FText::GetEmpty();
-        UEnum::GetDisplayValueAsText(PhysicalEffort, SpecialInputValue);
-        GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Current Pattern: %s"), *SpecialInputValue.ToString()));
+        
+		// Subscribe (To the dynamic delegate "OnAudioFinished") a class method that is to control the changing of audio
+		// component (And with it, aural representation of the character's physical effort) upon the stopping of the new
+		// audio component.
+        
+		BreathingAudioComponent->OnAudioFinished.AddUniqueDynamic(this
+			, &UBreathingComponent::ControlCharacterBreathing);
 	}
+}
+
+
+void UBreathingComponent::EnterRecovery()
+{
+	if (bIsExhausted)
+    {
+    	// If the character is exhausted from the effort of breaking into a sprint - previously - before a full recovery,
+    	// they are required to take a greater number of recovery breaths.
+    	
+    	RecoveryDuration = PenaltyRecoveryBreaths;
+    }
+    else
+    {
+    	RecoveryDuration = RecoveryBreaths;
+    }
+
+	// Index the first recovery breath cycle.
+	RecoveryBreathCycle = 1;
+    
+    // Return the character to their regular walking pace.
+    
+    AActor* CharacterActor = GetOwner();
+    
+    if (AFirstPersonCharacter* Character = Cast<AFirstPersonCharacter>(CharacterActor))
+    {
+    	Character->EnterWalk({});
+    }
+}
+
+
+void UBreathingComponent::SetPhysicalEffort(EPhysicalEffort InPhysicalEffort)
+{
+	// Set the state of physical effort of the first person character's movement according to the in argument and flag
+	// that a change in physical effort has been made.
+	
+	PhysicalEffort = InPhysicalEffort;
+	bChangeInPhysicalEffort = true;
+}
+
+
+void UBreathingComponent::ControlCharacterBreathing()
+{
+	// Note, that much of the work done to control the cycle of breathing patterns across changes in physical effort was
+	// to be handled in MetaSounds*.
+	
+	// As of 25/05/23, a MetaSound's Output cannot be accessed outside of MetaSounds (Epic Developer Community, 2022); a
+	// MetaSound handling the looping of a (Random of a collection) sound is useless in across some application features
+	// as the number of loops (Essential game logic data) could not be known in this native class.
+
+	
+	switch(PhysicalEffort)
+	{
+	case EPhysicalEffort::Heavy:
+
+		// There are three cases in which the state of physical effort is "Heavy" upon completion/end of playback of
+		// some breathing pattern:
+		
+		// *	the state is being initially entered, or
+		// *	a single breathing pattern has completed playback and either another "Heavy" breath is to be taken, or
+		// *	the maximum duration of a sprint has been met.
+		
+		if (HeavyBreathCycle == SprintDuration)
+		{
+			// The index of heavy breath cycles is equal to the number of breaths that measure the duration of the first
+			// person character's maximum sprint duration; the character enters a state of "Recovery" and returns to a
+			// walking pace.
+
+			// Reset (Zero) the index of heavy breath cycles.
+			HeavyBreathCycle = 0;
+
+			SetPhysicalEffort(EPhysicalEffort::Recovery);
+			EnterRecovery();
+		}
+		else
+		{
+			if (bChangeInPhysicalEffort)
+			{
+				// A change in physical effort signifies that the current state is being newly entered. Correctly index
+				// this cycle as the first in a series.
+
+				HeavyBreathCycle = 1;
+				bChangeInPhysicalEffort = false;
+			}
+			else
+			{
+				// Index that a new cycle of heavy breathing is being entered.
+				++HeavyBreathCycle;
+			}
+		}
+
+		break;
+
+	case EPhysicalEffort::Recovery:
+
+		if (RecoveryBreathCycle >= RecoveryDuration)
+		{
+			// The number of recovery breath cycles is equal to the duration (In number of recovery breath cycles) of
+			// this recovery period; the first person character has fully recovered and is not experiencing exhaustion.
+			
+			// Reset recovery state data and signify (For the sake of the coming initialisation of the "Breathing" audio
+			// component) a change in physical effort to "Regular."
+
+			bIsExhausted = false;
+			RecoveryBreathCycle = 0;
+			
+			SetPhysicalEffort(EPhysicalEffort::Regular);
+		}
+		else
+		{
+			// A non-zero recovery breath cycle index would indicate that the state was not properly exited, but
+			// interrupted (By a faint), in which case entry into the recovery state is not new.
+			
+			if (bChangeInPhysicalEffort && RecoveryBreathCycle == 0)
+			{
+				// Initialise the recovery state (That can be entered either manually by the player's easing of
+				// character movement, or automatically, with the duration of a maximum sprint being reached).
+
+				EnterRecovery();
+
+				// Reset, as the change in physical effort is being resolved.
+				bChangeInPhysicalEffort = false;
+			}
+			else
+			{
+				// Another recovery breath is being taken; increment the relevant index.
+				
+				++RecoveryBreathCycle;
+			}
+		}
+			
+		break;
+
+	case EPhysicalEffort::Faint:
+
+		if (bChangeInPhysicalEffort)
+		{
+			// A "Faint" is done from the "Recovery" state, and so the completion of some playback that has invoked this
+			// method was that of a recovery breath. Index, accordingly.
+			
+			++RecoveryBreathCycle;
+			
+			// The change in physical effort is recognised and reflected by the initialisation of a new audio component,
+			// later in this function ("InitialiseBreathingPattern").
+			
+			// Reset, as the change in physical effort is being resolved.
+			bChangeInPhysicalEffort = false;
+		}
+		else
+		{
+			// The completion of a faint (A single, sharp inhale) sees the representation of the physical effort of the
+			// first person character return to the "Recovery" state.
+
+			SetPhysicalEffort(EPhysicalEffort::Recovery);
+		}
+
+		break;
+
+	default:
+		break;
+	}
+	
+	// Spawn an audio component according to the current state of physical effort.
+
+	InitialiseBreathingPattern();
+
+	
+	// *This method, instead sees more work done for each case in state switching for cases that require work to be done
+	// on ingress and egress. A (More suitable object-oriented paradigm) *Class-Based* Finite State Machine (Aleksandr
+	// Hovhannisyan, 2020) would have modelled this behaviour with greater elegance.
+	/*
+    FText SpecialInputValue = FText::GetEmpty();
+    UEnum::GetDisplayValueAsText(PhysicalEffort, SpecialInputValue);
+    GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Current Pattern: %s"), *SpecialInputValue.ToString()));*/
 }
 
 
@@ -82,13 +252,6 @@ void UBreathingComponent::BeginPlay()
 }
 
 
-void UBreathingComponent::TickComponent(float DeltaTime, ELevelTick TickType
-	, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-}
-
-
 void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InCharacter
 	, const ECharacterMovement InCharacterMovementMode)
 {
@@ -96,16 +259,6 @@ void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InChara
 	{
 		return;
 	}
-	/**/
-	if (InCharacterMovementMode == ECharacterMovement::Sprinting)
-	{
-		PhysicalEffort = EPhysicalEffort::Heavy;
-		BreathingAudioComponent->SetBoolParameter(TEXT("bChangeInPattern"), true);
-	}
-	return;
-	/**/
-	// A change in physical effort is to be reflected aurally; the currently active MetaSound is to instructed to close.
-	bool bChangeInPhysicalEffort = false;
 	
 	if (InCharacterMovementMode == ECharacterMovement::Sprinting)
 	{
@@ -113,29 +266,25 @@ void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InChara
 		{
 		case EPhysicalEffort::Regular:
 
-			if (!bIsExhausted)
-			{
-				// The physical effort of a first person character breaking into a sprint is deemed "Heavy."
+			// The physical effort of a first person character breaking into a sprint is deemed "Heavy."
 				
-				PhysicalEffort = EPhysicalEffort::Heavy;
-				bChangeInPhysicalEffort = true;
+			SetPhysicalEffort(EPhysicalEffort::Heavy);
 
-				InCharacter->EnterSprint({}); //*
-				
-				// *Control of the character movement mode (Use of the publicly accessible EnterSprint/Walk methods) is
-				// protected by a Passkey access pattern; only friend classes of MovementPassKey (In
-				// FirstPersonCharacter.h) can provide the necessary argument (The default construct "{}", of
-				// MovementPassKey) to the public EnterSprint/Walk methods and so only friend classes of MovementPassKey
-				// may call upon these AFirstPersonCharacter functions.
-			}
-			else
+			if (BreathingAudioComponent)
 			{
-				// The character is forced to faint physical effort (The failed attempt to break into a sprint is to be
-				// aurally resolved).
-				
-				PhysicalEffort = EPhysicalEffort::Faint;
-				bChangeInPhysicalEffort = true;
+				// Playback of the regular breathing pattern is freely (i.e. without consideration of whether or not
+				// the exhale or inhale is being heard) interrupted by the sharp inhale of a "Heavy" breath.
+					
+				BreathingAudioComponent->Stop();
 			}
+
+			InCharacter->EnterSprint({}); //*
+				
+			// *Control of the character movement mode (Use of the publicly accessible EnterSprint/Walk methods) is
+			// protected by a Passkey access pattern; only friend classes of MovementPassKey (In
+			// FirstPersonCharacter.h) can provide the necessary argument (The default construct "{}", of
+			// MovementPassKey) to the public EnterSprint/Walk methods and so only friend classes of MovementPassKey
+			// may call upon these AFirstPersonCharacter functions.
 
 			break;
 			
@@ -148,8 +297,6 @@ void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InChara
 
 		case EPhysicalEffort::Recovery:
 
-			// An exhausted character will not sprint.
-
 			if (!bIsExhausted)
 			{
 				// The physical effort of a first person character breaking into a sprint is deemed "Heavy." A character
@@ -157,12 +304,25 @@ void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InChara
 				// be exhausted by the effort of breaking into another sprint (The recovery duration is elongated and a
 				// character cannot break into another sprint until a full recovery is made).
 				
-				PhysicalEffort = EPhysicalEffort::Heavy;
-				bChangeInPhysicalEffort = true;
+				SetPhysicalEffort(EPhysicalEffort::Heavy);
+
 				bIsExhausted = true;
-				RecoveryDuration = PenaltyRecoveryBreaths;
+				RecoveryBreathCycle = 0;
 				
 				InCharacter->EnterSprint({});
+			}
+			else
+			{
+				// The character is forced to faint physical effort (The failed attempt to break into a sprint is to be
+				// aurally represented).
+				
+				SetPhysicalEffort(EPhysicalEffort::Faint);
+
+				if (BreathingAudioComponent)
+				{
+					// A quick gasp (Inhale) may freely interrupt a regular exhale or inhale.
+					BreathingAudioComponent->Stop();
+				}
 			}
 			
 			break;
@@ -181,29 +341,28 @@ void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InChara
 			// The character is set to recover from the peak ("Heavy") intensity of sprinting and can return to walking
             // pace.
 
-            if (HeavyBreathCycles <= 1)
-            {
-            	// No recovery penalty is incurred where the duration of physical exertion at peak intensity was kept to
-            	// no more than a single breath cycle.
+			RecoveryDuration = RecoveryBreaths;
+			SetPhysicalEffort(EPhysicalEffort::Recovery);
 
-            	RecoveryDuration = 0;
-            }
-            else
-            {
-            	PhysicalEffort = EPhysicalEffort::Recovery;
-            	bChangeInPhysicalEffort = true;
-            	RecoveryDuration = RecoveryBreaths;
-            }
-            
+			HeavyBreathCycle = 0;
             InCharacter->EnterWalk({});
 		}
 	}
-
-	if (bChangeInPhysicalEffort)
-	{
-		// The actively playing MetaSound is notified of the change in kind of breathing pattern; the actively playing
-		// MetaSound will complete its playback of the currently playing audio asset and then finish.
-		
-		BreathingAudioComponent->SetBoolParameter(TEXT("bChangeInPattern"), true);
-	}
 }
+
+
+/**
+ *	Aleksandr Hovhannisyan
+ *	(2020)
+ *	Implementing a Finite State Machine in C++.
+ *	Available at: https://www.aleksandrhovhannisyan.com/blog/implementing-a-finite-state-machine-in-cpp/
+ *	(Accessed: 25 May 2023).
+ */
+
+/**
+ *	Epic Developer Community
+ *	(2022)
+ *	Metasound outputs accessible via blueprint?.
+ *	Available at: https://forums.unrealengine.com/t/metasound-outputs-accessible-via-blueprint/542873/5
+ *	(Accessed: 25 May 2023).
+ */
