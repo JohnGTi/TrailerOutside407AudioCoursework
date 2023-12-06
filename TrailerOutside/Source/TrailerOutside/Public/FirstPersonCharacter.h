@@ -77,6 +77,16 @@ protected:
 
 public:
 	/**
+	 *	A debugging/demonstration tool requires knowledge of the active Breathing system so as to subscribe one of its
+	 *	methods.
+	 */
+	UFUNCTION()
+		UBreathingComponent* GetBreathingComponent() const
+	{
+		return BreathingComponent;
+	}
+	
+	/**
 	 *	Update the character movement mode and, according to that mode ("Sprinting," or "Walking"), set this character's
 	 *	movement component's movement (Maximum walking) speed.
 	 */

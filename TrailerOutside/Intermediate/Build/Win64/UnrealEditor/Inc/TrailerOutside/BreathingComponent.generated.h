@@ -20,19 +20,25 @@ enum class EPhysicalEffort : uint8;
 #define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execUpdateCharacterMovement); \
+	DECLARE_FUNCTION(execBreathingSystemToggle); \
+	DECLARE_FUNCTION(execMute); \
 	DECLARE_FUNCTION(execControlCharacterBreathing); \
 	DECLARE_FUNCTION(execSetPhysicalEffort); \
 	DECLARE_FUNCTION(execEnterRecovery); \
-	DECLARE_FUNCTION(execInitialiseBreathingPattern);
+	DECLARE_FUNCTION(execInitialiseBreathingPattern); \
+	DECLARE_FUNCTION(execGetVolumeMultiplier);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execUpdateCharacterMovement); \
+	DECLARE_FUNCTION(execBreathingSystemToggle); \
+	DECLARE_FUNCTION(execMute); \
 	DECLARE_FUNCTION(execControlCharacterBreathing); \
 	DECLARE_FUNCTION(execSetPhysicalEffort); \
 	DECLARE_FUNCTION(execEnterRecovery); \
-	DECLARE_FUNCTION(execInitialiseBreathingPattern);
+	DECLARE_FUNCTION(execInitialiseBreathingPattern); \
+	DECLARE_FUNCTION(execGetVolumeMultiplier);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_36_INCLASS_NO_PURE_DECLS \

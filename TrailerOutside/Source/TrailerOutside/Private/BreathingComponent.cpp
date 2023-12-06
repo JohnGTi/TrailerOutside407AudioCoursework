@@ -10,8 +10,8 @@
 
 UBreathingComponent::UBreathingComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.
-	PrimaryComponentTick.bCanEverTick = true;
+	// This component does not tick.
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
 #if WITH_EDITOR
@@ -31,19 +31,32 @@ void UBreathingComponent::PostEditChangeProperty(FPropertyChangedEvent& Property
 #endif
 
 
+float UBreathingComponent::GetVolumeMultiplier() const
+{
+	// The output volume may be scaled by an internal representation of volume (BreathingVolume) or muted.
+		
+	if (bIsAuralOutputMute)
+	{
+		return 0.f;
+	}
+	
+	return BreathingVolume;
+}
+
+
 void UBreathingComponent::InitialiseBreathingPattern()
 {
 	if (USoundBase* BreathCycleMetaSound = *BreathingPatternMap.Find(PhysicalEffort))
 	{
-		// Spawn (Without spatialisation or distance-attenuation) an audio component that is to handle the MetaSound
+		// Spawn (Without spatialisation, distance-attenuation...) an audio component that is to handle the MetaSound
 		// that newly represents the change in the first person character's kind of breathing.
-        
-		BreathingAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), BreathCycleMetaSound, 1.f
-				, 1.f, 0.f, nullptr, true, true);
+		
+		BreathingAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), BreathCycleMetaSound, GetVolumeMultiplier()
+			, 1.f, 0.f, nullptr, true, true);
 
 		if (BreathingAudioComponent == nullptr)
 		{
-			// This return sees no other path to restart audio. Either design some contingency or throw an error.
+			// This return sees no other path to restart audio. TODO: design some contingency or throw an error.
 			return;
 		}
         
@@ -61,8 +74,8 @@ void UBreathingComponent::EnterRecovery()
 {
 	if (bIsExhausted)
     {
-    	// If the character is exhausted from the effort of breaking into a sprint - previously - before a full recovery,
-    	// they are required to take a greater number of recovery breaths.
+    	// If the character is exhausted having previously broken into a sprint before a full recovery, they are
+    	// required to take a greater number of recovery breaths.
     	
     	RecoveryDuration = PenaltyRecoveryBreaths;
     }
@@ -99,10 +112,10 @@ void UBreathingComponent::ControlCharacterBreathing()
 {
 	// Note, that much of the work done to control the cycle of breathing patterns across changes in physical effort was
 	// to be handled in MetaSounds*.
-	
-	// As of 25/05/23, a MetaSound's Output cannot be accessed outside of MetaSounds (Epic Developer Community, 2022); a
-	// MetaSound handling the looping of a (Random of a collection) sound is useless in across some application features
-	// as the number of loops (Essential game logic data) could not be known in this native class.
+
+	// MetaSound Output cannot be accessed outside of MetaSounds (Epic Developer Community, 2022); programmatic control
+	// of Breathing cycles was delegated to the C++ originally intended to receive MetaSound output (Such as the number
+	// of Wave Player iterations).
 
 	
 	switch(PhysicalEffort)
@@ -112,7 +125,7 @@ void UBreathingComponent::ControlCharacterBreathing()
 		// There are three cases in which the state of physical effort is "Heavy" upon completion/end of playback of
 		// some breathing pattern:
 		
-		// *	the state is being initially entered, or
+		// *	the state is being initially entered as a consequence of player control, or
 		// *	a single breathing pattern has completed playback and either another "Heavy" breath is to be taken, or
 		// *	the maximum duration of a sprint has been met.
 		
@@ -164,8 +177,9 @@ void UBreathingComponent::ControlCharacterBreathing()
 		}
 		else
 		{
-			// A non-zero recovery breath cycle index would indicate that the state was not properly exited, but
-			// interrupted (By a faint), in which case entry into the recovery state is not new.
+			// A "zero" recovery breath cycle index indicates that the state was previously properly exited (Its index
+			// was reset). An index that is non-zero suggests that the first-person character is continuing a recovery
+			// period that was temporarily interrupted by a failed attempt to break into a sprint.
 			
 			if (bChangeInPhysicalEffort && RecoveryBreathCycle == 0)
 			{
@@ -224,10 +238,26 @@ void UBreathingComponent::ControlCharacterBreathing()
 	// *This method, instead sees more work done for each case in state switching for cases that require work to be done
 	// on ingress and egress. A (More suitable object-oriented paradigm) *Class-Based* Finite State Machine (Aleksandr
 	// Hovhannisyan, 2020) would have modelled this behaviour with greater elegance.
-	/*
-    FText SpecialInputValue = FText::GetEmpty();
-    UEnum::GetDisplayValueAsText(PhysicalEffort, SpecialInputValue);
-    GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Current Pattern: %s"), *SpecialInputValue.ToString()));*/
+}
+
+
+void UBreathingComponent::Mute(const bool bInMuteAuralOutput)
+{
+	// Flag the state of future audio component spawns.
+	bIsAuralOutputMute = bInMuteAuralOutput;
+	
+	if (BreathingAudioComponent)
+	{
+		BreathingAudioComponent->SetVolumeMultiplier(GetVolumeMultiplier());
+	}
+}
+
+
+void UBreathingComponent::BreathingSystemToggle(bool bInEnableSystem)
+{
+	// An active Breathing system is not to be muted, and vice versa.
+	
+	Mute(!bInEnableSystem);
 }
 
 
@@ -236,7 +266,7 @@ void UBreathingComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// Build the map of pairs of state of physical effort that the first person character movement expresses, and
-	// MetaSound (Pointer to USoundBase objects) representations of the kind of breathing patterns/ that aurally
+	// MetaSound (Pointer to USoundBase objects) representations of the kind of breathing patterns that aurally
 	// communicate this effort to the player.
 
 	BreathingPatternMap.Emplace(EPhysicalEffort::Regular, RegularBreathPattern);
@@ -244,7 +274,6 @@ void UBreathingComponent::BeginPlay()
 	BreathingPatternMap.Emplace(EPhysicalEffort::Recovery, FeverishBreathPattern);
 	BreathingPatternMap.Emplace(EPhysicalEffort::Faint, FaintBreath);
 
-	
 	// Initialise (And set up) the default breathing pattern audio component ("InitialiseBreathingPattern," does this
 	// according to the default state of physical effort).
 	
@@ -333,7 +362,7 @@ void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InChara
 	}
 	else if (InCharacterMovementMode == ECharacterMovement::Walking)
 	{
-		// The first person character return to walking pace must be from peak expenditure of physical effort
+		// The first person character return to walking pace must be from heavy expenditure of physical effort
 		// (Sprinting), otherwise, the character is already walking and there is no change in movement mode.
 		
 		if (PhysicalEffort == EPhysicalEffort::Heavy)
@@ -356,7 +385,7 @@ void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InChara
  *	(2020)
  *	Implementing a Finite State Machine in C++.
  *	Available at: https://www.aleksandrhovhannisyan.com/blog/implementing-a-finite-state-machine-in-cpp/
- *	(Accessed: 25 May 2023).
+ *	(Accessed: 04 December 2023).
  */
 
 /**
@@ -364,5 +393,5 @@ void UBreathingComponent::UpdateCharacterMovement(AFirstPersonCharacter* InChara
  *	(2022)
  *	Metasound outputs accessible via blueprint?.
  *	Available at: https://forums.unrealengine.com/t/metasound-outputs-accessible-via-blueprint/542873/5
- *	(Accessed: 25 May 2023).
+ *	(Accessed: 04 December 2023).
  */

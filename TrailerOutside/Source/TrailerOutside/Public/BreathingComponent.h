@@ -41,6 +41,10 @@ public:
 
 
 private:
+	/** According to whether or not aural output is muted, return the scale of volume output. */
+	UFUNCTION()
+		float GetVolumeMultiplier() const;
+	
 	/**
 	 *	Create an audio component with default settings (Specifically, with zero spatialisation) that are suitable to
 	 *	the stereo (The sound is to envelope the player's head) breathing effect. Subscribe a class method that is to
@@ -65,12 +69,28 @@ private:
 	UFUNCTION()
 		void ControlCharacterBreathing();
 
+
+public:
+	/**
+	 *	A debugging/demonstration tool requires that the aural output of this component is toggleable.
+	 *
+	 *	@param bInMuteAuralOutput	Whether or not the volume of the aural output of this component is to be zeroed.
+	 */
+	UFUNCTION()
+		void Mute(const bool bInMuteAuralOutput);
+	
+	/**
+	 *	@param bInEnableSystem	Whether or not the Breathing system is to be perceived as active or inactive.
+	 */
+	UFUNCTION()
+		void BreathingSystemToggle(bool bInEnableSystem);
+
 protected:
 	/** Called when the game starts. */
 	virtual void BeginPlay() override;
 
 	
-public:	
+public:
 	/**
 	 *	Protected first person character methods that directly change the mode of character movement are called upon
 	 *	according to the Breathing system's reinterpretation of that which is offered as an argument.
@@ -107,6 +127,13 @@ private:
 	 */
 	UPROPERTY()
 		TMap<EPhysicalEffort, USoundBase*> BreathingPatternMap;
+
+	/**  */
+	UPROPERTY(EditDefaultsOnly)
+		float BreathingVolume = 1.f;
+
+	/**  */
+	bool bIsAuralOutputMute = false;
 
 	/**
 	 *	The "Breathing" audio component handles a MetaSound, at a time, that will play a single or series of breathing

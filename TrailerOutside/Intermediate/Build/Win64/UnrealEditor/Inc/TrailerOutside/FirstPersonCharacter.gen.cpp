@@ -15,8 +15,8 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_AFirstPersonCharacter_NoRegister();
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_AFirstPersonCharacter();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
-	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_UBreathingComponent_NoRegister();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 // End Cross Module References
 	static FEnumRegistrationInfo Z_Registration_Info_UEnum_EPressure;
 	static UEnum* EPressure_StaticEnum()
@@ -154,11 +154,19 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		P_THIS->AssessMovementInput(Z_Param_InAxisValue,(EPressure&)(Z_Param_Out_OutInputPressure),Z_Param_Out_OutPressTimeStamp);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AFirstPersonCharacter::execGetBreathingComponent)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(UBreathingComponent**)Z_Param__Result=P_THIS->GetBreathingComponent();
+		P_NATIVE_END;
+	}
 	void AFirstPersonCharacter::StaticRegisterNativesAFirstPersonCharacter()
 	{
 		UClass* Class = AFirstPersonCharacter::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AssessMovementInput", &AFirstPersonCharacter::execAssessMovementInput },
+			{ "GetBreathingComponent", &AFirstPersonCharacter::execGetBreathingComponent },
 			{ "MoveAlongForwardAxis", &AFirstPersonCharacter::execMoveAlongForwardAxis },
 			{ "MoveAlongLateralAxis", &AFirstPersonCharacter::execMoveAlongLateralAxis },
 		};
@@ -214,6 +222,48 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics
+	{
+		struct FirstPersonCharacter_eventGetBreathingComponent_Parms
+		{
+			UBreathingComponent* ReturnValue;
+		};
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ReturnValue_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::NewProp_ReturnValue_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000080588, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FirstPersonCharacter_eventGetBreathingComponent_Parms, ReturnValue), Z_Construct_UClass_UBreathingComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::NewProp_ReturnValue_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::NewProp_ReturnValue_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "/**\n\x09 *\x09""A debugging/demonstration tool requires knowledge of the active Breathing system so as to subscribe one of its\n\x09 *\x09methods.\n\x09 */" },
+		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
+		{ "ToolTip", "A debugging/demonstration tool requires knowledge of the active Breathing system so as to subscribe one of its\nmethods." },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFirstPersonCharacter, nullptr, "GetBreathingComponent", nullptr, nullptr, sizeof(Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::FirstPersonCharacter_eventGetBreathingComponent_Parms), Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x40020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -342,6 +392,7 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AFirstPersonCharacter_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput, "AssessMovementInput" }, // 3112691335
+		{ &Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent, "GetBreathingComponent" }, // 522408314
 		{ &Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis, "MoveAlongForwardAxis" }, // 2647273091
 		{ &Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis, "MoveAlongLateralAxis" }, // 2548438137
 	};
@@ -476,9 +527,9 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		{ ECharacterMovement_StaticEnum, TEXT("ECharacterMovement"), &Z_Registration_Info_UEnum_ECharacterMovement, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3212392268U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFirstPersonCharacter, AFirstPersonCharacter::StaticClass, TEXT("AFirstPersonCharacter"), &Z_Registration_Info_UClass_AFirstPersonCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFirstPersonCharacter), 1939134075U) },
+		{ Z_Construct_UClass_AFirstPersonCharacter, AFirstPersonCharacter::StaticClass, TEXT("AFirstPersonCharacter"), &Z_Registration_Info_UClass_AFirstPersonCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFirstPersonCharacter), 68472824U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_194701304(TEXT("/Script/TrailerOutside"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_1241720292(TEXT("/Script/TrailerOutside"),
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::EnumInfo));

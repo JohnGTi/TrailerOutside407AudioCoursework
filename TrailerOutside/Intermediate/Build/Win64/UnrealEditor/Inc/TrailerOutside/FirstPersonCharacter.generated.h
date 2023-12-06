@@ -9,6 +9,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 enum class EPressure : uint8;
+class UBreathingComponent;
 #ifdef TRAILEROUTSIDE_FirstPersonCharacter_generated_h
 #error "FirstPersonCharacter.generated.h already included, missing '#pragma once' in FirstPersonCharacter.h"
 #endif
@@ -19,14 +20,16 @@ enum class EPressure : uint8;
  \
 	DECLARE_FUNCTION(execMoveAlongLateralAxis); \
 	DECLARE_FUNCTION(execMoveAlongForwardAxis); \
-	DECLARE_FUNCTION(execAssessMovementInput);
+	DECLARE_FUNCTION(execAssessMovementInput); \
+	DECLARE_FUNCTION(execGetBreathingComponent);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execMoveAlongLateralAxis); \
 	DECLARE_FUNCTION(execMoveAlongForwardAxis); \
-	DECLARE_FUNCTION(execAssessMovementInput);
+	DECLARE_FUNCTION(execAssessMovementInput); \
+	DECLARE_FUNCTION(execGetBreathingComponent);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_INCLASS_NO_PURE_DECLS \

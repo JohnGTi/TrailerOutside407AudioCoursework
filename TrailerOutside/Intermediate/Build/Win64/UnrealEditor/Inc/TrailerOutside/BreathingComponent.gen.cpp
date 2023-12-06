@@ -87,6 +87,22 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		P_THIS->UpdateCharacterMovement(Z_Param_InCharacter,ECharacterMovement(Z_Param_InCharacterMovementMode));
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UBreathingComponent::execBreathingSystemToggle)
+	{
+		P_GET_UBOOL(Z_Param_bInEnableSystem);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->BreathingSystemToggle(Z_Param_bInEnableSystem);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UBreathingComponent::execMute)
+	{
+		P_GET_UBOOL(Z_Param_bInMuteAuralOutput);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->Mute(Z_Param_bInMuteAuralOutput);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UBreathingComponent::execControlCharacterBreathing)
 	{
 		P_FINISH;
@@ -116,17 +132,66 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		P_THIS->InitialiseBreathingPattern();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UBreathingComponent::execGetVolumeMultiplier)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(float*)Z_Param__Result=P_THIS->GetVolumeMultiplier();
+		P_NATIVE_END;
+	}
 	void UBreathingComponent::StaticRegisterNativesUBreathingComponent()
 	{
 		UClass* Class = UBreathingComponent::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "BreathingSystemToggle", &UBreathingComponent::execBreathingSystemToggle },
 			{ "ControlCharacterBreathing", &UBreathingComponent::execControlCharacterBreathing },
 			{ "EnterRecovery", &UBreathingComponent::execEnterRecovery },
+			{ "GetVolumeMultiplier", &UBreathingComponent::execGetVolumeMultiplier },
 			{ "InitialiseBreathingPattern", &UBreathingComponent::execInitialiseBreathingPattern },
+			{ "Mute", &UBreathingComponent::execMute },
 			{ "SetPhysicalEffort", &UBreathingComponent::execSetPhysicalEffort },
 			{ "UpdateCharacterMovement", &UBreathingComponent::execUpdateCharacterMovement },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics
+	{
+		struct BreathingComponent_eventBreathingSystemToggle_Parms
+		{
+			bool bInEnableSystem;
+		};
+		static void NewProp_bInEnableSystem_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bInEnableSystem;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::NewProp_bInEnableSystem_SetBit(void* Obj)
+	{
+		((BreathingComponent_eventBreathingSystemToggle_Parms*)Obj)->bInEnableSystem = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::NewProp_bInEnableSystem = { "bInEnableSystem", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(BreathingComponent_eventBreathingSystemToggle_Parms), &Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::NewProp_bInEnableSystem_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::NewProp_bInEnableSystem,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "/**\n\x09 *\x09@param bInEnableSystem\x09Whether or not the Breathing system is to be perceived as active or inactive.\n\x09 */" },
+		{ "ModuleRelativePath", "Public/BreathingComponent.h" },
+		{ "ToolTip", "@param bInEnableSystem  Whether or not the Breathing system is to be perceived as active or inactive." },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UBreathingComponent, nullptr, "BreathingSystemToggle", nullptr, nullptr, sizeof(Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::BreathingComponent_eventBreathingSystemToggle_Parms), Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_UBreathingComponent_ControlCharacterBreathing_Statics
 	{
@@ -174,6 +239,40 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics
+	{
+		struct BreathingComponent_eventGetVolumeMultiplier_Parms
+		{
+			float ReturnValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(BreathingComponent_eventGetVolumeMultiplier_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "/** According to whether or not aural output is muted, return the scale of volume output. */" },
+		{ "ModuleRelativePath", "Public/BreathingComponent.h" },
+		{ "ToolTip", "According to whether or not aural output is muted, return the scale of volume output." },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UBreathingComponent, nullptr, "GetVolumeMultiplier", nullptr, nullptr, sizeof(Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::BreathingComponent_eventGetVolumeMultiplier_Parms), Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x40040401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UBreathingComponent_InitialiseBreathingPattern_Statics
 	{
 #if WITH_METADATA
@@ -195,6 +294,53 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UBreathingComponent_InitialiseBreathingPattern_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UBreathingComponent_Mute_Statics
+	{
+		struct BreathingComponent_eventMute_Parms
+		{
+			bool bInMuteAuralOutput;
+		};
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bInMuteAuralOutput_MetaData[];
+#endif
+		static void NewProp_bInMuteAuralOutput_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bInMuteAuralOutput;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UBreathingComponent_Mute_Statics::NewProp_bInMuteAuralOutput_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	void Z_Construct_UFunction_UBreathingComponent_Mute_Statics::NewProp_bInMuteAuralOutput_SetBit(void* Obj)
+	{
+		((BreathingComponent_eventMute_Parms*)Obj)->bInMuteAuralOutput = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UBreathingComponent_Mute_Statics::NewProp_bInMuteAuralOutput = { "bInMuteAuralOutput", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(BreathingComponent_eventMute_Parms), &Z_Construct_UFunction_UBreathingComponent_Mute_Statics::NewProp_bInMuteAuralOutput_SetBit, METADATA_PARAMS(Z_Construct_UFunction_UBreathingComponent_Mute_Statics::NewProp_bInMuteAuralOutput_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UBreathingComponent_Mute_Statics::NewProp_bInMuteAuralOutput_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UBreathingComponent_Mute_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBreathingComponent_Mute_Statics::NewProp_bInMuteAuralOutput,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UBreathingComponent_Mute_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "/**\n\x09 *\x09""A debugging/demonstration tool requires that the aural output of this component is toggleable.\n\x09 *\n\x09 *\x09@param bInMuteAuralOutput\x09Whether or not the volume of the aural output of this component is to be zeroed.\n\x09 */" },
+		{ "ModuleRelativePath", "Public/BreathingComponent.h" },
+		{ "ToolTip", "A debugging/demonstration tool requires that the aural output of this component is toggleable.\n\n@param bInMuteAuralOutput       Whether or not the volume of the aural output of this component is to be zeroed." },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UBreathingComponent_Mute_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UBreathingComponent, nullptr, "Mute", nullptr, nullptr, sizeof(Z_Construct_UFunction_UBreathingComponent_Mute_Statics::BreathingComponent_eventMute_Parms), Z_Construct_UFunction_UBreathingComponent_Mute_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UBreathingComponent_Mute_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UBreathingComponent_Mute_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UBreathingComponent_Mute_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UBreathingComponent_Mute()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UBreathingComponent_Mute_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -320,6 +466,10 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 #endif
 		static const UECodeGen_Private::FMapPropertyParams NewProp_BreathingPatternMap;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_BreathingVolume_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_BreathingVolume;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_BreathingAudioComponent_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_BreathingAudioComponent;
@@ -349,9 +499,12 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_TrailerOutside,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UBreathingComponent_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_UBreathingComponent_BreathingSystemToggle, "BreathingSystemToggle" }, // 4256120009
 		{ &Z_Construct_UFunction_UBreathingComponent_ControlCharacterBreathing, "ControlCharacterBreathing" }, // 897289729
 		{ &Z_Construct_UFunction_UBreathingComponent_EnterRecovery, "EnterRecovery" }, // 3250149514
+		{ &Z_Construct_UFunction_UBreathingComponent_GetVolumeMultiplier, "GetVolumeMultiplier" }, // 1954345931
 		{ &Z_Construct_UFunction_UBreathingComponent_InitialiseBreathingPattern, "InitialiseBreathingPattern" }, // 705704954
+		{ &Z_Construct_UFunction_UBreathingComponent_Mute, "Mute" }, // 4023623600
 		{ &Z_Construct_UFunction_UBreathingComponent_SetPhysicalEffort, "SetPhysicalEffort" }, // 1987605945
 		{ &Z_Construct_UFunction_UBreathingComponent_UpdateCharacterMovement, "UpdateCharacterMovement" }, // 1432813236
 	};
@@ -409,6 +562,14 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 #endif
 	const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap = { "BreathingPatternMap", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UBreathingComponent, BreathingPatternMap), EMapPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap_MetaData)) }; // 425198537
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume_MetaData[] = {
+		{ "Category", "BreathingComponent" },
+		{ "Comment", "/**  */" },
+		{ "ModuleRelativePath", "Public/BreathingComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume = { "BreathingVolume", nullptr, (EPropertyFlags)0x0040000000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UBreathingComponent, BreathingVolume), METADATA_PARAMS(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingAudioComponent_MetaData[] = {
 		{ "Comment", "/**\n\x09 *\x09The \"Breathing\" audio component handles a MetaSound, at a time, that will play a single or series of breathing\n\x09 *\x09pattern audio assets. Continuous playing of a series of breathing patterns may come to an end after a maximum\n\x09 *\x09number has been played, or having been interrupted by an input flag sent in response to movement of the first\n\x09 *\x09person character.\n\x09 */" },
 		{ "EditInline", "true" },
@@ -462,6 +623,7 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap_Key_KeyProp_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap_Key_KeyProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingAudioComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_PhysicalEffort_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_PhysicalEffort,
@@ -509,9 +671,9 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		{ EPhysicalEffort_StaticEnum, TEXT("EPhysicalEffort"), &Z_Registration_Info_UEnum_EPhysicalEffort, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 425198537U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UBreathingComponent, UBreathingComponent::StaticClass, TEXT("UBreathingComponent"), &Z_Registration_Info_UClass_UBreathingComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBreathingComponent), 3963854651U) },
+		{ Z_Construct_UClass_UBreathingComponent, UBreathingComponent::StaticClass, TEXT("UBreathingComponent"), &Z_Registration_Info_UClass_UBreathingComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBreathingComponent), 3372624690U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_526672911(TEXT("/Script/TrailerOutside"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_3118484841(TEXT("/Script/TrailerOutside"),
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::EnumInfo));
