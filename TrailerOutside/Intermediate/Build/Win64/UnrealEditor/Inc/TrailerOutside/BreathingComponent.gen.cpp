@@ -470,6 +470,11 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_BreathingVolume;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsAuralOutputMute_MetaData[];
+#endif
+		static void NewProp_bIsAuralOutputMute_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsAuralOutputMute;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_BreathingAudioComponent_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_BreathingAudioComponent;
@@ -563,12 +568,24 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 	const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap = { "BreathingPatternMap", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UBreathingComponent, BreathingPatternMap), EMapPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap_MetaData)) }; // 425198537
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume_MetaData[] = {
-		{ "Category", "BreathingComponent" },
+		{ "Category", "AudioOutput" },
 		{ "Comment", "/**  */" },
 		{ "ModuleRelativePath", "Public/BreathingComponent.h" },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume = { "BreathingVolume", nullptr, (EPropertyFlags)0x0040000000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UBreathingComponent, BreathingVolume), METADATA_PARAMS(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UBreathingComponent_Statics::NewProp_bIsAuralOutputMute_MetaData[] = {
+		{ "Category", "BreathingComponent" },
+		{ "Comment", "/**  */" },
+		{ "ModuleRelativePath", "Public/BreathingComponent.h" },
+	};
+#endif
+	void Z_Construct_UClass_UBreathingComponent_Statics::NewProp_bIsAuralOutputMute_SetBit(void* Obj)
+	{
+		((UBreathingComponent*)Obj)->bIsAuralOutputMute = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UBreathingComponent_Statics::NewProp_bIsAuralOutputMute = { "bIsAuralOutputMute", nullptr, (EPropertyFlags)0x0040000000010001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UBreathingComponent), &Z_Construct_UClass_UBreathingComponent_Statics::NewProp_bIsAuralOutputMute_SetBit, METADATA_PARAMS(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_bIsAuralOutputMute_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UBreathingComponent_Statics::NewProp_bIsAuralOutputMute_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingAudioComponent_MetaData[] = {
 		{ "Comment", "/**\n\x09 *\x09The \"Breathing\" audio component handles a MetaSound, at a time, that will play a single or series of breathing\n\x09 *\x09pattern audio assets. Continuous playing of a series of breathing patterns may come to an end after a maximum\n\x09 *\x09number has been played, or having been interrupted by an input flag sent in response to movement of the first\n\x09 *\x09person character.\n\x09 */" },
@@ -624,6 +641,7 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap_Key_KeyProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingPatternMap,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingVolume,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_bIsAuralOutputMute,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_BreathingAudioComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_PhysicalEffort_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBreathingComponent_Statics::NewProp_PhysicalEffort,
@@ -671,9 +689,9 @@ void EmptyLinkFunctionForGeneratedCodeBreathingComponent() {}
 		{ EPhysicalEffort_StaticEnum, TEXT("EPhysicalEffort"), &Z_Registration_Info_UEnum_EPhysicalEffort, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 425198537U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UBreathingComponent, UBreathingComponent::StaticClass, TEXT("UBreathingComponent"), &Z_Registration_Info_UClass_UBreathingComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBreathingComponent), 3372624690U) },
+		{ Z_Construct_UClass_UBreathingComponent, UBreathingComponent::StaticClass, TEXT("UBreathingComponent"), &Z_Registration_Info_UClass_UBreathingComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBreathingComponent), 3145334865U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_3118484841(TEXT("/Script/TrailerOutside"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_4176176201(TEXT("/Script/TrailerOutside"),
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_BreathingComponent_h_Statics::EnumInfo));

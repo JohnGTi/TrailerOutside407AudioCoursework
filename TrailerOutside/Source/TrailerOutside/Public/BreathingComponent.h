@@ -129,11 +129,12 @@ private:
 		TMap<EPhysicalEffort, USoundBase*> BreathingPatternMap;
 
 	/**  */
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "AudioOutput")
 		float BreathingVolume = 1.f;
 
 	/**  */
-	bool bIsAuralOutputMute = false;
+	UPROPERTY(EditDefaultsOnly)
+		bool bIsAuralOutputMute = true;
 
 	/**
 	 *	The "Breathing" audio component handles a MetaSound, at a time, that will play a single or series of breathing

@@ -48,11 +48,11 @@ void UBreathingComponent::InitialiseBreathingPattern()
 {
 	if (USoundBase* BreathCycleMetaSound = *BreathingPatternMap.Find(PhysicalEffort))
 	{
-		// Spawn (Without spatialisation, distance-attenuation...) an audio component that is to handle the MetaSound
-		// that newly represents the change in the first person character's kind of breathing.
-		BreathingAudioComponent = UGameplayStatics::SpawnSoundAttached(BreathCycleMetaSound, GetOwner()->GetRootComponent());
-		/*BreathingAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), BreathCycleMetaSound, GetVolumeMultiplier()
-			, 1.f, 0.f, nullptr, true, true);*/
+		// Spawn an audio component that is to handle the MetaSound that newly represents the change in the first person
+		// character's kind of breathing.
+		
+		BreathingAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), BreathCycleMetaSound, GetVolumeMultiplier()
+			, 1.f, 0.f, nullptr, true, true);
 
 		if (BreathingAudioComponent == nullptr)
 		{
