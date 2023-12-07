@@ -50,9 +50,9 @@ void UBreathingComponent::InitialiseBreathingPattern()
 	{
 		// Spawn (Without spatialisation, distance-attenuation...) an audio component that is to handle the MetaSound
 		// that newly represents the change in the first person character's kind of breathing.
-		
-		BreathingAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), BreathCycleMetaSound, GetVolumeMultiplier()
-			, 1.f, 0.f, nullptr, true, true);
+		BreathingAudioComponent = UGameplayStatics::SpawnSoundAttached(BreathCycleMetaSound, GetOwner()->GetRootComponent());
+		/*BreathingAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), BreathCycleMetaSound, GetVolumeMultiplier()
+			, 1.f, 0.f, nullptr, true, true);*/
 
 		if (BreathingAudioComponent == nullptr)
 		{

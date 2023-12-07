@@ -35,7 +35,7 @@ void AFirstPersonCharacter::PreInitializeComponents()
 void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	if(UCharacterMovementComponent* CharacterMovementComponent = GetCharacterMovement())
 	{
 		// Default the maximum movement speed of the character to the designed walking speed value.
