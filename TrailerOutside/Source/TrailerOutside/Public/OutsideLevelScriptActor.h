@@ -6,6 +6,7 @@
 #include "OutsideLevelScriptActor.generated.h"
 
 /** Forward declaration. */
+class AAreaLocalisation;
 
 
 /** A single-cast delegate broadcasts to the relevant system that it should enable or disable its activity/output. */
@@ -76,4 +77,19 @@ private:
 	/** By default, all sound management systems are enabled. */
 	UPROPERTY()
 		ESoundManagementSystem ActiveSystem = ESoundManagementSystem::All;
+
+
+protected:
+	/**
+	 *	A reusable, abstract (A component that does not require any physical representation) behaviour that includes
+	 *	calculation of distance attenuation in volume and frequency, and occlusion detection, e.g.
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "SpawnableActors")
+		TSubclassOf<AAreaLocalisation> BPAreaLocalisation;
+	UPROPERTY()
+		AAreaLocalisation* DrummingEffect = nullptr;
+
+	/**  */
+	UPROPERTY(EditDefaultsOnly, Category = "DrummingEffect")
+		FVector DrummingInitialPosition = FVector::Zero();
 };

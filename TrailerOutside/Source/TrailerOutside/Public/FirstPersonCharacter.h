@@ -67,7 +67,7 @@ public:
 
 protected:
 	/**
-	 *	Prior to the initialisation of any components, Blueprint data available for the creation of a Blueprint
+	 *	Prior to the initialisation of any components, access Blueprint data available for the creation of a Blueprint
 	 *	implemented component.
 	 */
 	virtual void PreInitializeComponents() override;
@@ -76,6 +76,12 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	/**
+	 *	@return An FVector representative of the location of this actor's "ears."
+	 */
+	UFUNCTION()
+		FVector GetListenerLocation() const;
+	
 	/**
 	 *	A debugging/demonstration tool requires knowledge of the active Breathing system so as to subscribe one of its
 	 *	methods.
@@ -139,7 +145,15 @@ private:
 		TSubclassOf<UBreathingComponent> BPBreathingComponent;
 	UPROPERTY()
 		UBreathingComponent* BreathingComponent = nullptr;
-	
+
+
+protected:
+	/** A Blueprint implementation may pass knowledge of its attached camera component. */
+	UPROPERTY(BlueprintReadWrite, Category = "BlueprintComponents")
+		class UCameraComponent* NativeFirstPersonCamera = nullptr;
+
+
+private:
 	/**
 	 *	For input to qualify as "Hard" (For it to register as a complete input) its scale must escape the default,
 	 *	"Easy."

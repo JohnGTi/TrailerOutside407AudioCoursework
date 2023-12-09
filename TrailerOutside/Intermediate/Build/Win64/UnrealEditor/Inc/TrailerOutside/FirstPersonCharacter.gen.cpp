@@ -16,7 +16,9 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_AFirstPersonCharacter();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_UBreathingComponent_NoRegister();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 // End Cross Module References
 	static FEnumRegistrationInfo Z_Registration_Info_UEnum_EPressure;
 	static UEnum* EPressure_StaticEnum()
@@ -161,12 +163,20 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		*(UBreathingComponent**)Z_Param__Result=P_THIS->GetBreathingComponent();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AFirstPersonCharacter::execGetListenerLocation)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(FVector*)Z_Param__Result=P_THIS->GetListenerLocation();
+		P_NATIVE_END;
+	}
 	void AFirstPersonCharacter::StaticRegisterNativesAFirstPersonCharacter()
 	{
 		UClass* Class = AFirstPersonCharacter::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AssessMovementInput", &AFirstPersonCharacter::execAssessMovementInput },
 			{ "GetBreathingComponent", &AFirstPersonCharacter::execGetBreathingComponent },
+			{ "GetListenerLocation", &AFirstPersonCharacter::execGetListenerLocation },
 			{ "MoveAlongForwardAxis", &AFirstPersonCharacter::execMoveAlongForwardAxis },
 			{ "MoveAlongLateralAxis", &AFirstPersonCharacter::execMoveAlongLateralAxis },
 		};
@@ -267,6 +277,40 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics
+	{
+		struct FirstPersonCharacter_eventGetListenerLocation_Parms
+		{
+			FVector ReturnValue;
+		};
+		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FirstPersonCharacter_eventGetListenerLocation_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "/**\n\x09 *\x09@return An FVector representative of the location of this actor's \"ears.\"\n\x09 */" },
+		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
+		{ "ToolTip", "@return An FVector representative of the location of this actor's \"ears.\"" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFirstPersonCharacter, nullptr, "GetListenerLocation", nullptr, nullptr, sizeof(Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::FirstPersonCharacter_eventGetListenerLocation_Parms), Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x40820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis_Statics
 	{
 		struct FirstPersonCharacter_eventMoveAlongForwardAxis_Parms
@@ -355,6 +399,10 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_BreathingComponent_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_BreathingComponent;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_NativeFirstPersonCamera_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_NativeFirstPersonCamera;
 		static const UECodeGen_Private::FBytePropertyParams NewProp_ForwardPressure_Underlying;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ForwardPressure_MetaData[];
@@ -393,6 +441,7 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_AFirstPersonCharacter_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AFirstPersonCharacter_AssessMovementInput, "AssessMovementInput" }, // 3112691335
 		{ &Z_Construct_UFunction_AFirstPersonCharacter_GetBreathingComponent, "GetBreathingComponent" }, // 522408314
+		{ &Z_Construct_UFunction_AFirstPersonCharacter_GetListenerLocation, "GetListenerLocation" }, // 3194479964
 		{ &Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongForwardAxis, "MoveAlongForwardAxis" }, // 2647273091
 		{ &Z_Construct_UFunction_AFirstPersonCharacter_MoveAlongLateralAxis, "MoveAlongLateralAxis" }, // 2548438137
 	};
@@ -421,6 +470,16 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent = { "BreathingComponent", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, BreathingComponent), Z_Construct_UClass_UBreathingComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_NativeFirstPersonCamera_MetaData[] = {
+		{ "Category", "BlueprintComponents" },
+		{ "Comment", "/** A Blueprint implementation may pass knowledge of its attached camera component. */" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/FirstPersonCharacter.h" },
+		{ "ToolTip", "A Blueprint implementation may pass knowledge of its attached camera component." },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_NativeFirstPersonCamera = { "NativeFirstPersonCamera", nullptr, (EPropertyFlags)0x002008000008000c, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AFirstPersonCharacter, NativeFirstPersonCamera), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_NativeFirstPersonCamera_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_NativeFirstPersonCamera_MetaData)) };
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_ForwardPressure_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_ForwardPressure_MetaData[] = {
@@ -476,6 +535,7 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFirstPersonCharacter_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BPBreathingComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_BreathingComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_NativeFirstPersonCamera,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_ForwardPressure_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_ForwardPressure,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFirstPersonCharacter_Statics::NewProp_LateralPressure_Underlying,
@@ -527,9 +587,9 @@ void EmptyLinkFunctionForGeneratedCodeFirstPersonCharacter() {}
 		{ ECharacterMovement_StaticEnum, TEXT("ECharacterMovement"), &Z_Registration_Info_UEnum_ECharacterMovement, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3212392268U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFirstPersonCharacter, AFirstPersonCharacter::StaticClass, TEXT("AFirstPersonCharacter"), &Z_Registration_Info_UClass_AFirstPersonCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFirstPersonCharacter), 68472824U) },
+		{ Z_Construct_UClass_AFirstPersonCharacter, AFirstPersonCharacter::StaticClass, TEXT("AFirstPersonCharacter"), &Z_Registration_Info_UClass_AFirstPersonCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFirstPersonCharacter), 1721503556U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_1241720292(TEXT("/Script/TrailerOutside"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_135276758(TEXT("/Script/TrailerOutside"),
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_Statics::EnumInfo));

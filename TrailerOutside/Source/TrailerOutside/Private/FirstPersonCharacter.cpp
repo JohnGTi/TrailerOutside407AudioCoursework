@@ -3,6 +3,7 @@
 
 #include "FirstPersonCharacter.h"
 #include "BreathingComponent.h"
+#include "Camera/CameraComponent.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -18,8 +19,11 @@ void AFirstPersonCharacter::PreInitializeComponents()
 	Super::PreInitializeComponents();
 
 	// An actor component has no transform and so there is no spacial relationship to this actor to describe.
-	
-	BreathingComponent = NewObject<UBreathingComponent>(this, BPBreathingComponent);
+
+	if (IsValid(BPBreathingComponent))
+	{
+		BreathingComponent = NewObject<UBreathingComponent>(this, BPBreathingComponent);
+	}
 
 	if (BreathingComponent)
 	{
@@ -42,6 +46,16 @@ void AFirstPersonCharacter::BeginPlay()
 		
 		CharacterMovementComponent->MaxWalkSpeed = WalkSpeed;
 	}
+}
+
+
+FVector AFirstPersonCharacter::GetListenerLocation() const
+{
+	if (NativeFirstPersonCamera)
+	{
+		return NativeFirstPersonCamera->GetComponentLocation();
+	}
+	return FVector::Zero();
 }
 
 

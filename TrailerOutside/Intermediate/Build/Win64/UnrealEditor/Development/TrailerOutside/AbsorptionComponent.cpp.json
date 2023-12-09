@@ -1,0 +1,19 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\source\\traileroutside\\private\\absorptioncomponent.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\traileroutsideeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\unrealeditor\\development\\traileroutside\\definitions.traileroutside.h",
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\source\\traileroutside\\public\\absorptioncomponent.h",
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\unrealeditor\\inc\\traileroutside\\absorptioncomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\components\\capsulecomponent.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\shapecomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\capsulecomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

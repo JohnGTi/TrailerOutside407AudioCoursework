@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\unrealeditor\\inc\\traileroutside\\absorptioncomponent.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\traileroutsideeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\unrealeditor\\development\\traileroutside\\definitions.traileroutside.h",
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\source\\traileroutside\\public\\absorptioncomponent.h",
+            "c:\\users\\johngabriel\\documents\\github\\traileroutside407audiocoursework\\traileroutside\\intermediate\\build\\win64\\unrealeditor\\inc\\traileroutside\\absorptioncomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

@@ -21,7 +21,8 @@ class UBreathingComponent;
 	DECLARE_FUNCTION(execMoveAlongLateralAxis); \
 	DECLARE_FUNCTION(execMoveAlongForwardAxis); \
 	DECLARE_FUNCTION(execAssessMovementInput); \
-	DECLARE_FUNCTION(execGetBreathingComponent);
+	DECLARE_FUNCTION(execGetBreathingComponent); \
+	DECLARE_FUNCTION(execGetListenerLocation);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_RPC_WRAPPERS_NO_PURE_DECLS \
@@ -29,7 +30,8 @@ class UBreathingComponent;
 	DECLARE_FUNCTION(execMoveAlongLateralAxis); \
 	DECLARE_FUNCTION(execMoveAlongForwardAxis); \
 	DECLARE_FUNCTION(execAssessMovementInput); \
-	DECLARE_FUNCTION(execGetBreathingComponent);
+	DECLARE_FUNCTION(execGetBreathingComponent); \
+	DECLARE_FUNCTION(execGetListenerLocation);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_FirstPersonCharacter_h_62_INCLASS_NO_PURE_DECLS \

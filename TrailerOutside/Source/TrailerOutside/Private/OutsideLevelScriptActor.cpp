@@ -2,9 +2,11 @@
 
 
 #include "OutsideLevelScriptActor.h"
-#include "Kismet/GameplayStatics.h"
 #include "BreathingComponent.h"
 #include "FirstPersonCharacter.h"
+#include "AreaLocalisation.h"
+
+#include "Kismet/GameplayStatics.h"
 
 
 void AOutsideLevelScriptActor::BeginPlay()
@@ -17,9 +19,11 @@ void AOutsideLevelScriptActor::BeginPlay()
 
 
 	// Cache a reference to the Breathing system - a component of the player character - by way of the player character.
+
+	const auto FirstPersonCharacter = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld()
+		, 0));
 	
-	if (const auto FirstPersonCharacter = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld()
-		, 0)))
+	if (FirstPersonCharacter)
 	{
 		BreathingSystem = FirstPersonCharacter->GetBreathingComponent();
 	}
@@ -31,6 +35,17 @@ void AOutsideLevelScriptActor::BeginPlay()
 	{
 		ActiveSystemMap.Find(ESoundManagementSystem::Breathing)->BindDynamic(BreathingSystem
         		, &UBreathingComponent::BreathingSystemToggle);
+	}
+
+
+	// 
+
+	if (IsValid(BPAreaLocalisation))
+	{
+		DrummingEffect = GetWorld() != nullptr ? GetWorld()->SpawnActor<AAreaLocalisation>(BPAreaLocalisation
+			, DrummingInitialPosition, FRotator::ZeroRotator) : nullptr;
+		
+		DrummingEffect->AssignListener(FirstPersonCharacter);
 	}
 }
 

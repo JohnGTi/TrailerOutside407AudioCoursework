@@ -16,6 +16,9 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_AOutsideLevelScriptActor();
 	ENGINE_API UClass* Z_Construct_UClass_ALevelScriptActor();
 	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_UBreathingComponent_NoRegister();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+	TRAILEROUTSIDE_API UClass* Z_Construct_UClass_AAreaLocalisation_NoRegister();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 // End Cross Module References
 	struct Z_Construct_UDelegateFunction_TrailerOutside_OnActiveSystemToggleSignature__DelegateSignature_Statics
 	{
@@ -251,6 +254,18 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ActiveSystem_MetaData[];
 #endif
 		static const UECodeGen_Private::FEnumPropertyParams NewProp_ActiveSystem;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_BPAreaLocalisation_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_BPAreaLocalisation;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DrummingEffect_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_DrummingEffect;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DrummingInitialPosition_MetaData[];
+#endif
+		static const UECodeGen_Private::FStructPropertyParams NewProp_DrummingInitialPosition;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -307,6 +322,29 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 	};
 #endif
 	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_ActiveSystem = { "ActiveSystem", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AOutsideLevelScriptActor, ActiveSystem), Z_Construct_UEnum_TrailerOutside_ESoundManagementSystem, METADATA_PARAMS(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_ActiveSystem_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_ActiveSystem_MetaData)) }; // 122499432
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BPAreaLocalisation_MetaData[] = {
+		{ "Category", "SpawnableActors" },
+		{ "Comment", "/**\n\x09 *\x09""A reusable, abstract (A component that does not require any physical representation) behaviour that includes\n\x09 *\x09""calculation of distance attenuation in volume and frequency, and occlusion detection, e.g.\n\x09 */" },
+		{ "ModuleRelativePath", "Public/OutsideLevelScriptActor.h" },
+		{ "ToolTip", "A reusable, abstract (A component that does not require any physical representation) behaviour that includes\ncalculation of distance attenuation in volume and frequency, and occlusion detection, e.g." },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BPAreaLocalisation = { "BPAreaLocalisation", nullptr, (EPropertyFlags)0x0024080000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AOutsideLevelScriptActor, BPAreaLocalisation), Z_Construct_UClass_AAreaLocalisation_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BPAreaLocalisation_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BPAreaLocalisation_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingEffect_MetaData[] = {
+		{ "ModuleRelativePath", "Public/OutsideLevelScriptActor.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingEffect = { "DrummingEffect", nullptr, (EPropertyFlags)0x0020080000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AOutsideLevelScriptActor, DrummingEffect), Z_Construct_UClass_AAreaLocalisation_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingEffect_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingEffect_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingInitialPosition_MetaData[] = {
+		{ "Category", "DrummingEffect" },
+		{ "Comment", "/**  */" },
+		{ "ModuleRelativePath", "Public/OutsideLevelScriptActor.h" },
+	};
+#endif
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingInitialPosition = { "DrummingInitialPosition", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AOutsideLevelScriptActor, DrummingInitialPosition), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingInitialPosition_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingInitialPosition_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AOutsideLevelScriptActor_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BreathingSystemToggleDelegate,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BreathingSystem,
@@ -316,6 +354,9 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_ActiveSystemMap,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_ActiveSystem_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_ActiveSystem,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BPAreaLocalisation,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingEffect,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingInitialPosition,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AOutsideLevelScriptActor_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AOutsideLevelScriptActor>::IsAbstract,
@@ -357,9 +398,9 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 		{ ESoundManagementSystem_StaticEnum, TEXT("ESoundManagementSystem"), &Z_Registration_Info_UEnum_ESoundManagementSystem, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 122499432U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AOutsideLevelScriptActor, AOutsideLevelScriptActor::StaticClass, TEXT("AOutsideLevelScriptActor"), &Z_Registration_Info_UClass_AOutsideLevelScriptActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AOutsideLevelScriptActor), 4082925005U) },
+		{ Z_Construct_UClass_AOutsideLevelScriptActor, AOutsideLevelScriptActor::StaticClass, TEXT("AOutsideLevelScriptActor"), &Z_Registration_Info_UClass_AOutsideLevelScriptActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AOutsideLevelScriptActor), 1895485500U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_2182525858(TEXT("/Script/TrailerOutside"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_4016822162(TEXT("/Script/TrailerOutside"),
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::EnumInfo));
