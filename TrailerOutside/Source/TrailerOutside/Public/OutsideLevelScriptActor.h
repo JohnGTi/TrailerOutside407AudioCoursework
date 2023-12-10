@@ -9,6 +9,14 @@
 class AAreaLocalisation;
 
 
+/**
+ *	The actual value of the scene radius is 1891; a late development in this coursework realised that the origin of the
+ *	drumming rain effect was not at the centre of the traversable plane. A true fix was deprioritised, and this global
+ *	was amended.
+ */
+constexpr float SCENE_RADIUS = 2986.f;
+
+
 /** A single-cast delegate broadcasts to the relevant system that it should enable or disable its activity/output. */
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOnActiveSystemToggleSignature, bool, bInEnableSystem);
 
@@ -57,6 +65,8 @@ protected:
 	/** Switch between all or individual sound management systems being active. */
 	UFUNCTION(BlueprintCallable, Category = "DebuggingTools")
 		void SwitchActiveSystem();
+
+
 	
 private:
 	/**  */

@@ -17,11 +17,15 @@ class AActor;
 #define FID_TrailerOutside_Source_TrailerOutside_Public_AbsorptionComponent_h_13_SPARSE_DATA
 #define FID_TrailerOutside_Source_TrailerOutside_Public_AbsorptionComponent_h_13_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execIsSourceOccluded); \
+	DECLARE_FUNCTION(execUpdateParameters); \
 	DECLARE_FUNCTION(execTraceToListener);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_AbsorptionComponent_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execIsSourceOccluded); \
+	DECLARE_FUNCTION(execUpdateParameters); \
 	DECLARE_FUNCTION(execTraceToListener);
 
 

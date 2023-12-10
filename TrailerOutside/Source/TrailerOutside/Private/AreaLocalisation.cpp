@@ -52,6 +52,11 @@ void AAreaLocalisation::BeginPlay()
 	if (AudioLoopBase)
 	{
 		AudioComponent = UGameplayStatics::SpawnSoundAttached(AudioLoopBase, GetRootComponent());
+
+		if (AudioComponent)
+		{
+			AudioComponent->SetVolumeMultiplier(AudioLevel);
+		}
 	}
 }
 
@@ -65,21 +70,76 @@ void AAreaLocalisation::AssignListener(AFirstPersonCharacter* InListenerActor)
 }
 
 
-void AAreaLocalisation::OccludeAudio()
+void AAreaLocalisation::HandleAbsorption(const float InDeltaTime)
 {
-	// Part of the occlusion effect involves an equal stereo channel output, obscuring the directionality of the sound.
+	if (AbsorptionComponent)
+	{
+		// The absorption component traces a line in the direction of the listener and returns the first item that bloc-
+		// ks this line.
 
-	// In the case of the listener entering the tunnel that is the trailer-interior, bypassing the panning effect enhan-
-	// ces the sense that the rain impact on the above ceiling immerses the space.
-    			
-    if (AudioComponent)
-    {
-    	AudioComponent->SetBoolParameter("Pan", false);
-    }
+		const FVector ListenerLocation = Listener->GetListenerLocation();
+    
+		const AActor* HitActor = AbsorptionComponent->TraceToListener(GetActorLocation()
+			, ListenerLocation);
+    
+		const AActor* ListenerActor = Cast<AActor>(Listener);
+    
+		const EOcclusion PreviousPropagationState = AudioPropagation;
+    
+    
+		if (AudioPropagation == EOcclusion::Occluded && ListenerActor == HitActor)
+		{
+			// The previously occluded sound propagates to the listener unobstructed.
+    
+			AudioPropagation = EOcclusion::Free;
+		}
+		else if (AudioPropagation == EOcclusion::Free && ListenerActor != HitActor)
+		{
+			// An Audio channel line trace in the direction of the listener has been newly obstructed - the occlusion e-
+			// ffect is to demonstrate the absorption of sound by this obstruction.
+    
+			AudioPropagation = EOcclusion::Occluded;
+		}
 
-	// Flag occlusion.
+		const bool bChangeInPropagation = AudioPropagation != PreviousPropagationState;
 
-	bIsAudioOccluded = true;
+		// The Absorption component manipulates frequency and volume data using a UKismetMathLibrary 'Ease' function, so
+		// as to effect a gradual transition between an initial and target value. Both parameters are variable according
+		// to distance, though the calculations prioritise a deeper low pass cut-off where some obstruction blocks audio
+		// propagation.
+
+		float AudioVolumeMultiplier = 0.f;
+		float LowPassCutOff = 20000.f;
+		
+		AbsorptionComponent->UpdateParameters(!static_cast<bool>(AudioPropagation)
+			, GetActorLocation(), ListenerLocation
+			, AudioVolumeMultiplier
+			, bChangeInPropagation
+			, LowPassCutOff
+			, InDeltaTime);
+
+		if (AudioComponent == nullptr)
+		{
+			return;
+		}
+
+		// Atmospheric and surface effects of absorption are reflected in the attenuation of volume and high frequencies
+		// over relative-distance.
+
+		//AudioComponent->SetVolumeMultiplier(AudioLevel * AudioVolumeMultiplier);
+		AudioComponent->SetFloatParameter("LowPassCutOff", LowPassCutOff);
+    
+		if (bChangeInPropagation)
+		{
+			// Part of the occlusion effect involves an equal stereo channel output, obscuring the directionality of the
+			// sound.
+
+			// In the case of the listener entering the tunnel that is the trailer-interior, bypassing the panning effe-
+			// ct enhances the sense that the rain impact on the above ceiling immerses the space.
+			
+			AudioComponent->SetBoolParameter("Pan", !AbsorptionComponent->IsSourceOccluded());
+		}
+	}
 }
 
 
@@ -101,33 +161,9 @@ void AAreaLocalisation::Tick(float DeltaTime)
         }
 		prevt = GetWorld()->GetTimeSeconds();
 	}*/
-	if (AbsorptionComponent)
-	{
-		// The absorption component traces a line in the direction of the listener and returns the first item that bloc-
-		// ks this line.
-		
-		const AActor* HitActor = AbsorptionComponent->TraceToListener(GetActorLocation()
-			, Listener->GetListenerLocation());
+	
+	// Liaise with the Absorption component and accordingly update MetaSound parameters and component attributes to ref-
+	// lect absorption calculations.
 
-		if (Cast<AActor>(Listener) != HitActor)
-		{
-			// An Audio channel line trace in the direction of the listener has been obstructed - the occlusion effect
-			// is to demonstrate the absorption of sound by this obstruction.
-
-			OccludeAudio();
-		}
-		else if (bIsAudioOccluded)
-		{
-			//
-
-			if (AudioComponent)
-			{
-				AudioComponent->SetBoolParameter("Pan", true); GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, TEXT("Pan false."));
-			}
-			
-			// Occlusion has been reverted.
-
-			bIsAudioOccluded = false;
-		}
-	}
+	HandleAbsorption(DeltaTime);
 }

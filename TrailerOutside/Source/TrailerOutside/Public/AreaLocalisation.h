@@ -12,6 +12,17 @@ class AFirstPersonCharacter;
 
 
 /**
+ *	A semantic representation of the state of propagation of audio from a source to the listener.
+ */
+UENUM(BlueprintType)
+enum class EOcclusion : uint8
+{
+	Occluded,
+	Free
+};
+
+
+/**
  *	This actor, from which a playing sound is attached, will move relative to a listener within an area defined by line
  *	trace.
  */
@@ -43,14 +54,14 @@ public:
 
 	
 private:
-	/** A local helper function resolves a failure in the line of sight between this actor and the listener. */
+	/**  */
 	UFUNCTION()
-		void OccludeAudio();
+		void HandleAbsorption(float InDeltaTime);
 
 	
 public:
 	/** Called every frame. */
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(const float DeltaTime) override;
 
 
 	
@@ -72,21 +83,28 @@ protected:
 		UAbsorptionComponent* AbsorptionComponent = nullptr;
 
 
-private:bool flip = false;float prevt = 0.f;
+protected:bool flip = false;float prevt = 0.f;
 	/**
 	 *	The Blueprint interface of this actor is to assign soft references to the looping MetaSound, "DrummingRainLoop".
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "SoundManagement")
 		USoundBase* AudioLoopBase = nullptr;
-	
-	/**  */
+
+	/** The initial, and normal scaled level of the audio source. */
+	UPROPERTY(EditDefaultsOnly, Category = "SoundManagement")
+		float AudioLevel = 1.f;
+
+
+private:
+	/** The handling of the "DrummingRainLoop" MetaSound requires persistent representation. */
 	UPROPERTY()
 		UAudioComponent* AudioComponent = nullptr;
 
-	/**  */
+	/** Knowledge of this project's player character (The actor which experiences the soundscape). */
 	UPROPERTY()
 		AFirstPersonCharacter* Listener = nullptr;
 
-	/**  */
-	bool bIsAudioOccluded = false;
+	/** The path which a sound travels to a listener has not been assessed as obstructed. */
+	UPROPERTY()
+		EOcclusion AudioPropagation = EOcclusion::Free;
 };
