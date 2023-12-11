@@ -16,6 +16,7 @@ void AOutsideLevelScriptActor::BeginPlay()
 	// Build the map of pairs of system keys and activation/deactivation functions (/Single-cast delegates).
 	
 	ActiveSystemMap.Emplace(ESoundManagementSystem::Breathing, BreathingSystemToggleDelegate);
+	ActiveSystemMap.Emplace(ESoundManagementSystem::AreaLocalisation, AreaLocalisationSystemToggleDelegate);
 
 
 	// Cache a reference to the Breathing system - a component of the player character - by way of the player character.
@@ -52,7 +53,8 @@ void AOutsideLevelScriptActor::BeginPlay()
 			// As with the Breathing system, above, subscribe a corresponding function to the 'active sophisticated sou-
 			// nd system toggle' delegate.
 
-			ActiveSystemMap.Find(ESoundManagementSystem::AreaLocalisation)->BindDynamic(DrummingEffect, &UBreathingComponent::BreathingSystemToggle);
+			ActiveSystemMap.Find(ESoundManagementSystem::AreaLocalisation)->BindDynamic(DrummingEffect
+				, &AAreaLocalisation::AreaLocalisationSystemToggle);
 		}
 	}
 }

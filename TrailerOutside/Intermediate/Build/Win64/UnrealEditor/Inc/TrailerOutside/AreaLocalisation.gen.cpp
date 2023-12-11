@@ -102,15 +102,63 @@ void EmptyLinkFunctionForGeneratedCodeAreaLocalisation() {}
 		P_THIS->AssignListener(Z_Param_InListenerActor);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AAreaLocalisation::execAreaLocalisationSystemToggle)
+	{
+		P_GET_UBOOL(Z_Param_bInEnableSystem);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->AreaLocalisationSystemToggle(Z_Param_bInEnableSystem);
+		P_NATIVE_END;
+	}
 	void AAreaLocalisation::StaticRegisterNativesAAreaLocalisation()
 	{
 		UClass* Class = AAreaLocalisation::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "AreaLocalisationSystemToggle", &AAreaLocalisation::execAreaLocalisationSystemToggle },
 			{ "AssignListener", &AAreaLocalisation::execAssignListener },
 			{ "HandleAbsorption", &AAreaLocalisation::execHandleAbsorption },
 			{ "ValidateMovement", &AAreaLocalisation::execValidateMovement },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics
+	{
+		struct AreaLocalisation_eventAreaLocalisationSystemToggle_Parms
+		{
+			bool bInEnableSystem;
+		};
+		static void NewProp_bInEnableSystem_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bInEnableSystem;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::NewProp_bInEnableSystem_SetBit(void* Obj)
+	{
+		((AreaLocalisation_eventAreaLocalisationSystemToggle_Parms*)Obj)->bInEnableSystem = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::NewProp_bInEnableSystem = { "bInEnableSystem", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AreaLocalisation_eventAreaLocalisationSystemToggle_Parms), &Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::NewProp_bInEnableSystem_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::NewProp_bInEnableSystem,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "/**\n\x09 *\x09@param bInEnableSystem\x09Whether or not the Breathing system is to be perceived as active or inactive.\n\x09 */" },
+		{ "ModuleRelativePath", "Public/AreaLocalisation.h" },
+		{ "ToolTip", "@param bInEnableSystem  Whether or not the Breathing system is to be perceived as active or inactive." },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAreaLocalisation, nullptr, "AreaLocalisationSystemToggle", nullptr, nullptr, sizeof(Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::AreaLocalisation_eventAreaLocalisationSystemToggle_Parms), Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_AAreaLocalisation_AssignListener_Statics
 	{
@@ -309,6 +357,7 @@ void EmptyLinkFunctionForGeneratedCodeAreaLocalisation() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_TrailerOutside,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AAreaLocalisation_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_AAreaLocalisation_AreaLocalisationSystemToggle, "AreaLocalisationSystemToggle" }, // 1902184328
 		{ &Z_Construct_UFunction_AAreaLocalisation_AssignListener, "AssignListener" }, // 1842844140
 		{ &Z_Construct_UFunction_AAreaLocalisation_HandleAbsorption, "HandleAbsorption" }, // 1810175623
 		{ &Z_Construct_UFunction_AAreaLocalisation_ValidateMovement, "ValidateMovement" }, // 1200953532
@@ -357,13 +406,12 @@ void EmptyLinkFunctionForGeneratedCodeAreaLocalisation() {}
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLoopBase = { "AudioLoopBase", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAreaLocalisation, AudioLoopBase), Z_Construct_UClass_USoundBase_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLoopBase_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLoopBase_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLevel_MetaData[] = {
-		{ "Category", "SoundManagement" },
-		{ "Comment", "/** The initial, and normal scaled level of the audio source. */" },
+		{ "Comment", "/** The initial scaled level of the audio source defaults to full volume. */" },
 		{ "ModuleRelativePath", "Public/AreaLocalisation.h" },
-		{ "ToolTip", "The initial, and normal scaled level of the audio source." },
+		{ "ToolTip", "The initial scaled level of the audio source defaults to full volume." },
 	};
 #endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLevel = { "AudioLevel", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAreaLocalisation, AudioLevel), METADATA_PARAMS(Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLevel_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLevel_MetaData)) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLevel = { "AudioLevel", nullptr, (EPropertyFlags)0x0020080000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AAreaLocalisation, AudioLevel), METADATA_PARAMS(Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLevel_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioLevel_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAreaLocalisation_Statics::NewProp_AudioComponent_MetaData[] = {
 		{ "Comment", "/** The handling of the \"DrummingRainLoop\" MetaSound requires persistent representation. */" },
@@ -517,9 +565,9 @@ void EmptyLinkFunctionForGeneratedCodeAreaLocalisation() {}
 		{ EOcclusion_StaticEnum, TEXT("EOcclusion"), &Z_Registration_Info_UEnum_EOcclusion, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1898134833U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AAreaLocalisation, AAreaLocalisation::StaticClass, TEXT("AAreaLocalisation"), &Z_Registration_Info_UClass_AAreaLocalisation, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAreaLocalisation), 4055762587U) },
+		{ Z_Construct_UClass_AAreaLocalisation, AAreaLocalisation::StaticClass, TEXT("AAreaLocalisation"), &Z_Registration_Info_UClass_AAreaLocalisation, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAreaLocalisation), 934631095U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_1061509776(TEXT("/Script/TrailerOutside"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_3034135253(TEXT("/Script/TrailerOutside"),
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_Statics::EnumInfo));

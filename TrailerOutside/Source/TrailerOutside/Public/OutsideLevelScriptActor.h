@@ -72,7 +72,8 @@ private:
 	/**  */
 	UPROPERTY()
 		FOnActiveSystemToggleSignature BreathingSystemToggleDelegate;
-//...AreaLocalisationSystemToggleDelegate;...
+	UPROPERTY()
+		FOnActiveSystemToggleSignature AreaLocalisationSystemToggleDelegate;
 
 	/**
 	 *	The Breathing system is a component of the first-person character, which provides a reference to the component.

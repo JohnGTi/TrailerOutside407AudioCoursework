@@ -239,6 +239,10 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 #endif
 		static const UECodeGen_Private::FDelegatePropertyParams NewProp_BreathingSystemToggleDelegate;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_AreaLocalisationSystemToggleDelegate_MetaData[];
+#endif
+		static const UECodeGen_Private::FDelegatePropertyParams NewProp_AreaLocalisationSystemToggleDelegate;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_BreathingSystem_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_BreathingSystem;
@@ -295,6 +299,12 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 #endif
 	const UECodeGen_Private::FDelegatePropertyParams Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BreathingSystemToggleDelegate = { "BreathingSystemToggleDelegate", nullptr, (EPropertyFlags)0x0040000000080000, UECodeGen_Private::EPropertyGenFlags::Delegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AOutsideLevelScriptActor, BreathingSystemToggleDelegate), Z_Construct_UDelegateFunction_TrailerOutside_OnActiveSystemToggleSignature__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BreathingSystemToggleDelegate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BreathingSystemToggleDelegate_MetaData)) }; // 1625819762
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_AreaLocalisationSystemToggleDelegate_MetaData[] = {
+		{ "ModuleRelativePath", "Public/OutsideLevelScriptActor.h" },
+	};
+#endif
+	const UECodeGen_Private::FDelegatePropertyParams Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_AreaLocalisationSystemToggleDelegate = { "AreaLocalisationSystemToggleDelegate", nullptr, (EPropertyFlags)0x0040000000080000, UECodeGen_Private::EPropertyGenFlags::Delegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AOutsideLevelScriptActor, AreaLocalisationSystemToggleDelegate), Z_Construct_UDelegateFunction_TrailerOutside_OnActiveSystemToggleSignature__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_AreaLocalisationSystemToggleDelegate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_AreaLocalisationSystemToggleDelegate_MetaData)) }; // 1625819762
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BreathingSystem_MetaData[] = {
 		{ "Comment", "/**\n\x09 *\x09The Breathing system is a component of the first-person character, which provides a reference to the component.\n\x09 */" },
 		{ "EditInline", "true" },
@@ -347,6 +357,7 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingInitialPosition = { "DrummingInitialPosition", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AOutsideLevelScriptActor, DrummingInitialPosition), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingInitialPosition_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_DrummingInitialPosition_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AOutsideLevelScriptActor_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BreathingSystemToggleDelegate,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_AreaLocalisationSystemToggleDelegate,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_BreathingSystem,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_ActiveSystemMap_ValueProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AOutsideLevelScriptActor_Statics::NewProp_ActiveSystemMap_Key_KeyProp_Underlying,
@@ -398,9 +409,9 @@ void EmptyLinkFunctionForGeneratedCodeOutsideLevelScriptActor() {}
 		{ ESoundManagementSystem_StaticEnum, TEXT("ESoundManagementSystem"), &Z_Registration_Info_UEnum_ESoundManagementSystem, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 122499432U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AOutsideLevelScriptActor, AOutsideLevelScriptActor::StaticClass, TEXT("AOutsideLevelScriptActor"), &Z_Registration_Info_UClass_AOutsideLevelScriptActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AOutsideLevelScriptActor), 1895485500U) },
+		{ Z_Construct_UClass_AOutsideLevelScriptActor, AOutsideLevelScriptActor::StaticClass, TEXT("AOutsideLevelScriptActor"), &Z_Registration_Info_UClass_AOutsideLevelScriptActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AOutsideLevelScriptActor), 2881876954U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_4016822162(TEXT("/Script/TrailerOutside"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_2569122830(TEXT("/Script/TrailerOutside"),
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_TrailerOutside_Source_TrailerOutside_Public_OutsideLevelScriptActor_h_Statics::EnumInfo));

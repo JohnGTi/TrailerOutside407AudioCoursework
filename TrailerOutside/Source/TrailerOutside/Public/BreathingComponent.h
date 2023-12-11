@@ -134,7 +134,7 @@ private:
 
 	/**  */
 	UPROPERTY(EditDefaultsOnly)
-		bool bIsAuralOutputMute = true;
+		bool bIsAuralOutputMute = false;
 
 	/**
 	 *	The "Breathing" audio component handles a MetaSound, at a time, that will play a single or series of breathing

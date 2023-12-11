@@ -44,12 +44,19 @@ void AAreaLocalisation::PreInitializeComponents()
 }
 
 
-/*void AAreaLocalisation::AreaLocalisationSystemToggle(bool bInEnableSystem)
+void AAreaLocalisation::AreaLocalisationSystemToggle(bool bInEnableSystem)
 {
-	// An active Breathing system is not to be muted, and vice versa.
-	
-	Mute(!bInEnableSystem);
-}*/
+	// Adapt the local audio level scalar relative to the state of this sound management system.
+
+	if (bInEnableSystem)
+	{
+		AudioLevel = 1.f;
+	}
+	else
+	{
+		AudioLevel = 0.f;
+	}
+}
 
 
 void AAreaLocalisation::BeginPlay()

@@ -42,7 +42,17 @@ protected:
 	 *	implemented component.
 	 */
 	virtual void PreInitializeComponents() override;
-	
+
+
+public:
+	/**
+	 *	@param bInEnableSystem	Whether or not the Breathing system is to be perceived as active or inactive.
+	 */
+	UFUNCTION()
+		void AreaLocalisationSystemToggle(bool bInEnableSystem);
+
+
+protected:
 	/** Called when the game starts or when spawned. */
 	virtual void BeginPlay() override;
 
@@ -102,8 +112,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "SoundManagement")
 		USoundBase* AudioLoopBase = nullptr;
 
-	/** The initial, and normal scaled level of the audio source. */
-	UPROPERTY(EditDefaultsOnly, Category = "SoundManagement")
+	/** The initial scaled level of the audio source defaults to full volume. */
+	UPROPERTY()
 		float AudioLevel = 1.f;
 
 
