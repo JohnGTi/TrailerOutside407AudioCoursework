@@ -17,12 +17,14 @@ class AFirstPersonCharacter;
 #define FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_32_SPARSE_DATA
 #define FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_32_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execValidateMovement); \
 	DECLARE_FUNCTION(execHandleAbsorption); \
 	DECLARE_FUNCTION(execAssignListener);
 
 
 #define FID_TrailerOutside_Source_TrailerOutside_Public_AreaLocalisation_h_32_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execValidateMovement); \
 	DECLARE_FUNCTION(execHandleAbsorption); \
 	DECLARE_FUNCTION(execAssignListener);
 

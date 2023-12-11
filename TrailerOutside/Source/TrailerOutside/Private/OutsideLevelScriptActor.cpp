@@ -38,14 +38,22 @@ void AOutsideLevelScriptActor::BeginPlay()
 	}
 
 
-	// 
+	// Spawn, and pass knowledge of the first-person character to the Area-localisation system.
 
 	if (IsValid(BPAreaLocalisation))
 	{
 		DrummingEffect = GetWorld() != nullptr ? GetWorld()->SpawnActor<AAreaLocalisation>(BPAreaLocalisation
 			, DrummingInitialPosition, FRotator::ZeroRotator) : nullptr;
-		
-		DrummingEffect->AssignListener(FirstPersonCharacter);
+
+		if (DrummingEffect)
+		{
+			DrummingEffect->AssignListener(FirstPersonCharacter);
+
+			// As with the Breathing system, above, subscribe a corresponding function to the 'active sophisticated sou-
+			// nd system toggle' delegate.
+
+			ActiveSystemMap.Find(ESoundManagementSystem::AreaLocalisation)->BindDynamic(DrummingEffect, &UBreathingComponent::BreathingSystemToggle);
+		}
 	}
 }
 

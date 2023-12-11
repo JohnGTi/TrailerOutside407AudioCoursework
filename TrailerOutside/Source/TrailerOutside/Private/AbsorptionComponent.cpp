@@ -39,7 +39,8 @@ AActor* UAbsorptionComponent::TraceToListener(const FVector SourceWorldPosition
 		WorldContext->LineTraceSingleByChannel(TraceResult, SourceWorldPosition, ListenerWorldPosition
 			, OCCLUSION_AUDIO);
 		
-		DrawDebugLine(WorldContext,SourceWorldPosition,TraceResult.Location, FColor(255, 0, 0),false, -1, 0,1);
+		/*DrawDebugLine(WorldContext,SourceWorldPosition,TraceResult.Location, FColor(255, 0, 0)
+			,false, -1, 0,1);*/
 
 		// Return the actor that the line trace may have hit (The listener, an obstruction, or nothing).
 
@@ -79,16 +80,20 @@ void UAbsorptionComponent::UpdateParameters(const bool bInIsSourceOccluded, cons
 
 	float* PreviousCutOff = nullptr;
 	float TargetCutOff = 20000.f;
+
+	float* EaseStartLowPassCutOff = nullptr;
 	
 	if (bIsSourceOccluded)
 	{
 		PreviousCutOff = &PreviousDistanceCutOff;
 		TargetCutOff = InteriorLowPassCutOff;
+		EaseStartLowPassCutOff = &PreviousInteriorCutOff;
 	}
 	else
 	{
 		PreviousCutOff = &PreviousInteriorCutOff;
 		TargetCutOff = DistanceLowPassCutOff;
+		EaseStartLowPassCutOff = &PreviousDistanceCutOff;
 	}
 
 	// While the elapsed transition period is less than the assigned duration of the transition, update the elapsed time
@@ -105,16 +110,10 @@ void UAbsorptionComponent::UpdateParameters(const bool bInIsSourceOccluded, cons
 	OutLowPassCutOff = UKismetMathLibrary::Ease(*PreviousCutOff, TargetCutOff, EaseTimeElapsed / EaseDuration
 		, EEasingFunc::EaseOut);
 
-	if (bIsSourceOccluded)
-	{
-		PreviousInteriorCutOff = OutLowPassCutOff;
-	}
-	else
-	{
-		// The frequency cut-off (According to atmospheric and surface effects, and not occlusion) is further determined
-        // according to the relative distance of the listener.
-        
-        OutLowPassCutOff *= DistanceAttenuation;
-		PreviousDistanceCutOff = OutLowPassCutOff;
-	}
+	// The frequency cut-off (According to atmospheric and surface effects, and not occlusion) is further determined ac-
+	// cording to the relative distance of the listener.
+	
+	OutLowPassCutOff *= DistanceAttenuation;
+
+	*EaseStartLowPassCutOff = OutLowPassCutOff;
 }

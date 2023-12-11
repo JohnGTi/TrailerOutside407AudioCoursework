@@ -54,9 +54,23 @@ public:
 
 	
 private:
-	/**  */
+	/**
+	 *	The Absorption component designs attenuated values for the low pass cut-off frequency and volume level, which v-
+	 *	ary according to material obstruction in the audio's path to the listener.
+	 */
 	UFUNCTION()
 		void HandleAbsorption(float InDeltaTime);
+
+	/**
+	 *	A single line trace is drawn per call; incrementally (And exponentially), the step size grows between the previ-
+	 *	ous trace until the farthest viable displacement is determined at the current step-size granularity.
+	 *
+	 *	@param OutLocationInXY	The world location that the actor is to be displaced (An FVector2D, the actor does not
+	 *							pursue a listener in the Z-axis).
+	 *	@return Whether or not the movement is valid/the actor is to move.
+	 */
+	UFUNCTION()
+		bool ValidateMovement(FVector2D& OutLocationInXY);
 
 	
 public:
@@ -81,9 +95,7 @@ protected:
 		TSubclassOf<UAbsorptionComponent> BPAbsorptionComponent;
 	UPROPERTY()
 		UAbsorptionComponent* AbsorptionComponent = nullptr;
-
-
-protected:bool flip = false;float prevt = 0.f;
+	
 	/**
 	 *	The Blueprint interface of this actor is to assign soft references to the looping MetaSound, "DrummingRainLoop".
 	 */
@@ -100,6 +112,25 @@ private:
 	UPROPERTY()
 		UAudioComponent* AudioComponent = nullptr;
 
+
+protected:
+	/** The distance between the audio source and the surface area that it is bound to. */
+	UPROPERTY(EditDefaultsOnly, Category = "ChaseBehaviour")
+		float StaticHeightOffset = 8.f;
+
+	/**  */
+	UPROPERTY(EditDefaultsOnly, Category = "ChaseBehaviour")
+		float ChaseRate = 1.f;
+
+	/**
+	 *	This component offers the bounds within which this actor chase the listener (A line trace down the Z-axis valid-
+	 *	ates traversal if the hit component is the SurfaceArea).
+	 */
+	UPROPERTY()
+		UPrimitiveComponent* SurfaceArea = nullptr;
+
+
+private:
 	/** Knowledge of this project's player character (The actor which experiences the soundscape). */
 	UPROPERTY()
 		AFirstPersonCharacter* Listener = nullptr;
@@ -107,4 +138,29 @@ private:
 	/** The path which a sound travels to a listener has not been assessed as obstructed. */
 	UPROPERTY()
 		EOcclusion AudioPropagation = EOcclusion::Free;
+
+	/**  */
+	UPROPERTY()
+		bool Panning = true;
+	
+	/**
+	 *	Where the difference in the audio source and listener world locations fall in this range, the stereo panning ef-
+	 *	fect is bypassed.
+	 */
+	UPROPERTY()
+		float ObfuscationRange = 213.f;
+
+	/**  */
+	UPROPERTY(EditDefaultsOnly, Category = "ChaseBehaviour")
+    	int StepResolution = 1000;
+	
+	/** A positive sense of rotation effects a clockwise or counter direction, and vice versa. */
+	UPROPERTY()
+		float SearchSense = 1.f;
+
+	/**
+	 *	
+	 */
+	UPROPERTY()
+		uint8 TraceStep = 1;
 };

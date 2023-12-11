@@ -59,7 +59,7 @@ private:
 protected:
 	/** The default duration  is modelled after the time taken the first-person character to walk its diameter. */
 	UPROPERTY()
-		float EaseDuration = 0.34375f;
+		float EaseDuration = 1.0f;//0.34375f;
 	
 	/**
 	 *	The default extent of attenuation - within the range [The audio source world location, the radius of the traver-
